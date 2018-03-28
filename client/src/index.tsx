@@ -8,6 +8,8 @@ import { enthusiasm } from './Hello/Hello.reducers';
 import { StoreState } from './Store/index';
 import { Provider } from 'react-redux';
 import { devToolsEnhancer } from 'redux-devtools-extension';
+import { BrowserRouter, Link, Route } from 'react-router-dom';
+import Goodbye from './Goodbye/Goodbye';
 
 const composeEnhancers = devToolsEnhancer;
 
@@ -18,9 +20,24 @@ const preloadedState = {
 
 const store = createStore<StoreState>(enthusiasm, preloadedState, composeEnhancers({}));
 
+const App = () => (
+  <div>
+    <nav>
+      <Link to="/hello">Hello</Link>
+      <Link to="/goodbye">Goodbye</Link>
+    </nav>
+    <div>
+      <Route path="/hello" component={Hello} />
+      <Route path="/goodbye" component={Goodbye} />
+    </div>
+  </div>
+);
+
 ReactDOM.render(
   <Provider store={store}>
-    <Hello />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </Provider>,
   document.getElementById('root')!
 );
