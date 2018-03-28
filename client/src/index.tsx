@@ -3,22 +3,41 @@ import * as ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 import Hello from './Hello/Hello.container';
-import { createStore } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { enthusiasm } from './Hello/Hello.reducers';
 import { StoreState } from './Store/index';
 import { Provider } from 'react-redux';
-import { devToolsEnhancer } from 'redux-devtools-extension';
-import { BrowserRouter, Link, Route } from 'react-router-dom';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { Link, Route } from 'react-router-dom';
 import Goodbye from './Goodbye/Goodbye';
 
-const composeEnhancers = devToolsEnhancer;
+import createHistory from 'history/createBrowserHistory';
+import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux';
+
+const composeEnhancers = composeWithDevTools({});
 
 const preloadedState = {
-  enthusiasmLevel: 1,
-  languageName: 'TypeScript',
+  app: {
+    enthusiasmLevel: 1,
+    languageName: 'TypeScript',
+  }
 };
 
-const store = createStore<StoreState>(enthusiasm, preloadedState, composeEnhancers({}));
+const history = createHistory();
+
+const navigationMiddleware = routerMiddleware(history);
+
+const reducers = combineReducers<StoreState>({
+  app: enthusiasm,
+  router: routerReducer
+});
+
+const store = createStore<StoreState>(reducers, preloadedState, composeEnhancers(
+  applyMiddleware(navigationMiddleware)
+));
+
+// tslint:disable-next-line:no-console
+history.listen((location) => console.log(location));
 
 const App = () => (
   <div>
@@ -35,9 +54,9 @@ const App = () => (
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <ConnectedRouter history={history}>
       <App />
-    </BrowserRouter>
+    </ConnectedRouter>
   </Provider>,
   document.getElementById('root')!
 );

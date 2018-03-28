@@ -1,4 +1,5 @@
+import { HelloState } from '../Hello/Hello.reducers';
+
 export interface StoreState {
-    languageName: string;
-    enthusiasmLevel: number;
+    app: HelloState;
 }
