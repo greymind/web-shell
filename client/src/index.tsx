@@ -14,6 +14,10 @@ import Goodbye from './Goodbye/Goodbye';
 import createHistory from 'history/createBrowserHistory';
 import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux';
 
+import * as LogRocket from 'logrocket';
+
+LogRocket.init('jqnfct/web-shell-dev');
+
 const composeEnhancers = composeWithDevTools({});
 
 const preloadedState = {
@@ -33,7 +37,10 @@ const reducers = combineReducers<StoreState>({
 });
 
 const store = createStore<StoreState>(reducers, preloadedState, composeEnhancers(
-  applyMiddleware(navigationMiddleware)
+  applyMiddleware(
+    navigationMiddleware,
+    LogRocket.reduxMiddleware()
+  )
 ));
 
 // tslint:disable-next-line:no-console
