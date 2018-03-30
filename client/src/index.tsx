@@ -40,7 +40,7 @@ const enhancer = compose(
     navigationMiddleware,
     LogRocket.reduxMiddleware()
   ) as (next: StoreEnhancerStoreCreator<StoreState>) => StoreEnhancerStoreCreator<StoreState>,
-  DevTools.instrument()
+  DevTools.instrument(),
 );
 
 const store = createStore<StoreState>(reducers, preloadedState, enhancer);

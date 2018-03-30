@@ -6,6 +6,7 @@ import { createDevTools } from 'redux-devtools';
 // Monitors are separate packages, and you can make a custom one
 import LogMonitor from 'redux-devtools-log-monitor';
 import DockMonitor from 'redux-devtools-dock-monitor';
+import ChartMonitor from 'redux-devtools-chart-monitor';
 import SliderMonitor from 'redux-slider-monitor';
 import Inspector from 'redux-devtools-inspector';
 
@@ -19,6 +20,7 @@ const DevTools = createDevTools(
     >
         <Inspector />
         <SliderMonitor />
+        <ChartMonitor />
         <LogMonitor theme="tomorrow" />
     </DockMonitor>
 );
