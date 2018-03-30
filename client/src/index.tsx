@@ -11,7 +11,7 @@ import { Link, Route } from 'react-router-dom';
 import Goodbye from './Goodbye/Goodbye';
 
 import createHistory from 'history/createBrowserHistory';
-import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux';
+import { connectRouter, routerMiddleware, ConnectedRouter } from 'connected-react-router';
 
 import * as LogRocket from 'logrocket';
 import DevTools from './dev-tools';
@@ -32,7 +32,6 @@ const navigationMiddleware = routerMiddleware(history);
 
 const reducers = combineReducers<StoreState>({
   app: enthusiasm,
-  router: routerReducer
 });
 
 const enhancer = compose(
@@ -43,7 +42,7 @@ const enhancer = compose(
   DevTools.instrument(),
 );
 
-const store = createStore<StoreState>(reducers, preloadedState, enhancer);
+const store = createStore<StoreState>(connectRouter(history)(reducers), preloadedState, enhancer);
 
 // tslint:disable-next-line:no-console
 history.listen((location) => console.log(location));
