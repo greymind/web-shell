@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 import Hello from './Hello/Hello.container';
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import { createStore, combineReducers, applyMiddleware, compose, StoreEnhancerStoreCreator } from 'redux';
 import { enthusiasm } from './Hello/Hello.reducers';
 import { StoreState } from './Store/index';
 import { Provider } from 'react-redux';
@@ -14,10 +14,10 @@ import createHistory from 'history/createBrowserHistory';
 import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux';
 
 import * as LogRocket from 'logrocket';
+import DevTools from './dev-tools';
+import { hot } from 'react-hot-loader';
 
 LogRocket.init('jqnfct/web-shell-dev');
-
-const composeEnhancers = compose();
 
 const preloadedState = {
   app: {
@@ -35,12 +35,15 @@ const reducers = combineReducers<StoreState>({
   router: routerReducer
 });
 
-const store = createStore<StoreState>(reducers, preloadedState, composeEnhancers(
+const enhancer = compose(
   applyMiddleware(
     navigationMiddleware,
     LogRocket.reduxMiddleware()
-  )
-));
+  ) as (next: StoreEnhancerStoreCreator<StoreState>) => StoreEnhancerStoreCreator<StoreState>,
+  DevTools.instrument()
+);
+
+const store = createStore<StoreState>(reducers, preloadedState, enhancer);
 
 // tslint:disable-next-line:no-console
 history.listen((location) => console.log(location));
@@ -58,10 +61,15 @@ const App = () => (
   </div>
 );
 
+const HotApp = hot(module)(App);
+
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <App />
+      <div>
+        <HotApp />
+        <DevTools />
+      </div>
     </ConnectedRouter>
   </Provider>,
   document.getElementById('root')!

@@ -145,7 +145,7 @@ module.exports = {
             include: paths.appSrc,
             loader: require.resolve('babel-loader'),
             options: {
-              
+              plugins: ['react-hot-loader/babel'],
               compact: true,
             },
           },
