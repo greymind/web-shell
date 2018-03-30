@@ -2,7 +2,7 @@ import * as React from 'react';
 
 const Goodbye = () => (
     <div>
-        Goodbye
+        Goodbye my friend
     </div>
 );
 

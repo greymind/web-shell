@@ -1,21 +1,25 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
-import './index.css';
-import Hello from './Hello/Hello.container';
-import { createStore, combineReducers, applyMiddleware, compose, StoreEnhancerStoreCreator } from 'redux';
-import { enthusiasm } from './Hello/Hello.reducers';
-import { StoreState } from './Store/index';
-import { Provider } from 'react-redux';
-import { Link, Route } from 'react-router-dom';
-import Goodbye from './Goodbye/Goodbye';
 
+import { createStore, applyMiddleware, compose, StoreEnhancerStoreCreator } from 'redux';
+import { Provider } from 'react-redux';
+
+import { Link, Route } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 import { connectRouter, routerMiddleware, ConnectedRouter } from 'connected-react-router';
 
 import * as LogRocket from 'logrocket';
 import DevTools from './dev-tools';
 import { hot } from 'react-hot-loader';
+
+import reducers from './store/reducers';
+import { StoreState } from './store';
+
+import Hello from './Hello/Hello.container';
+import Goodbye from './Goodbye/Goodbye';
+
+import './index.css';
 
 LogRocket.init('jqnfct/web-shell-dev');
 
@@ -30,10 +34,6 @@ const history = createHistory();
 
 const navigationMiddleware = routerMiddleware(history);
 
-const reducers = combineReducers<StoreState>({
-  app: enthusiasm,
-});
-
 const enhancer = compose(
   applyMiddleware(
     navigationMiddleware,
@@ -44,8 +44,14 @@ const enhancer = compose(
 
 const store = createStore<StoreState>(connectRouter(history)(reducers), preloadedState, enhancer);
 
+if (module.hot) {
+  module.hot.accept(['./store/reducers'], () => {
+    store.replaceReducer(connectRouter(history)(reducers));
+  });
+}
+
 // tslint:disable-next-line:no-console
-history.listen((location) => console.log(location));
+// history.listen((location) => console.log(location));
 
 const App = () => (
   <div>

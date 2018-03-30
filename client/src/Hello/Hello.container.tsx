@@ -1,7 +1,7 @@
 import Hello from './Hello';
 import * as actions from './Hello.actions';
 import { connect, Dispatch } from 'react-redux';
-import { StoreState } from '../Store';
+import { StoreState } from '../store';
 
 export function mapStateToProps({ app }: StoreState) {
     return {
