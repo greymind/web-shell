@@ -3,11 +3,10 @@ import * as ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 import Hello from './Hello/Hello.container';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { enthusiasm } from './Hello/Hello.reducers';
 import { StoreState } from './Store/index';
 import { Provider } from 'react-redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
 import { Link, Route } from 'react-router-dom';
 import Goodbye from './Goodbye/Goodbye';
 
@@ -18,7 +17,7 @@ import * as LogRocket from 'logrocket';
 
 LogRocket.init('jqnfct/web-shell-dev');
 
-const composeEnhancers = composeWithDevTools({});
+const composeEnhancers = compose();
 
 const preloadedState = {
   app: {
