@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/ramda": "^0.25.21",
     "@types/react-redux": "^5.0.15",
     "@types/react-router": "^4.0.23",
     "@types/react-router-dom": "^4.2.5",
@@ -30,6 +31,7 @@
     "postcss-loader": "2.0.8",
     "promise": "8.0.1",
     "raf": "3.4.0",
+    "ramda": "^0.25.0",
     "react": "^16.2.0",
     "react-dev-utils": "4.2.1",
     "react-dom": "^16.2.0",
