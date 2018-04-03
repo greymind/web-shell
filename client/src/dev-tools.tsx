@@ -18,10 +18,10 @@ const DevTools = createDevTools(
         changeMonitorKey="ctrl-m"
         defaultIsVisible={false}
     >
-        <Inspector />
-        <SliderMonitor />
-        <ChartMonitor />
         <LogMonitor theme="tomorrow" />
+        <SliderMonitor />
+        <Inspector />
+        <ChartMonitor />
     </DockMonitor>
 );
 
