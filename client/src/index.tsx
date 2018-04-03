@@ -10,9 +10,11 @@ import createHistory from 'history/createBrowserHistory';
 import { connectRouter, routerMiddleware, ConnectedRouter } from 'connected-react-router';
 
 import * as LogRocket from 'logrocket';
-import DevTools from './dev-tools';
+import { persistState } from 'redux-devtools';
+import DevTools, { getDebugSessionKey } from './dev-tools';
+import reduxFreeze from 'redux-freeze';
 
-import reducers from './store/reducers';
+import rootReducer from './store/reducer';
 import { StoreState } from './store';
 
 import App from './App';
@@ -28,16 +30,18 @@ const navigationMiddleware = routerMiddleware(history);
 const enhancer = compose(
   applyMiddleware(
     navigationMiddleware,
+    process.env.NODE_ENV !== 'production' ? reduxFreeze : noop => noop,
     LogRocket.reduxMiddleware()
   ) as (next: StoreEnhancerStoreCreator<StoreState>) => StoreEnhancerStoreCreator<StoreState>,
   DevTools.instrument(),
+  persistState(getDebugSessionKey())
 );
 
-const store = createStore<StoreState>(connectRouter(history)(reducers), enhancer);
+const store = createStore<StoreState>(connectRouter(history)(rootReducer), enhancer);
 
 if (module.hot) {
-  module.hot.accept(['./store/reducers'], () => {
-    store.replaceReducer(connectRouter(history)(reducers));
+  module.hot.accept(['./store/reducer'], () => {
+    store.replaceReducer(connectRouter(history)(rootReducer));
   });
 }
 

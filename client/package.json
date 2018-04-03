@@ -76,6 +76,7 @@
     "redux-devtools-dock-monitor": "^1.1.3",
     "redux-devtools-inspector": "^0.11.3",
     "redux-devtools-log-monitor": "^1.4.0",
+    "redux-freeze": "^0.1.5",
     "redux-slider-monitor": "^2.0.0-1",
     "typescript": "^2.7.2"
   },
