@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
 import { StoreState } from '.';
-import { enthusiasm } from '../Hello/Hello.reducers';
+import { helloReducer, HelloState } from '../Hello/Hello.reducers';
 
 const reducers = combineReducers<StoreState>({
-    app: enthusiasm,
+    app: combineReducers<HelloState>({
+        hello: helloReducer
+    }),
 });
 
 export default reducers;

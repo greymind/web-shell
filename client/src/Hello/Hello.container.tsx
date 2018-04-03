@@ -1,16 +1,16 @@
-import Hello from './Hello';
+import Hello, { Props } from './Hello';
 import * as actions from './Hello.actions';
 import { connect, Dispatch } from 'react-redux';
 import { StoreState } from '../store';
 
-export function mapStateToProps({ app }: StoreState) {
+export function mapStateToProps({ app: { hello } }: StoreState): Props {
     return {
-        enthusiasmLevel: app.enthusiasmLevel,
-        name: app.languageName,
+        enthusiasmLevel: hello.enthusiasmLevel,
+        name: hello.languageName,
     };
 }
 
-export function mapDispatchToProps(dispatch: Dispatch<actions.EnthusiasmAction>) {
+export function mapDispatchToProps(dispatch: Dispatch<actions.EnthusiasmAction>): Partial<Props> {
     return {
         onIncrement: () => dispatch(actions.incrementEnthusiasm()),
         onDecrement: () => dispatch(actions.decrementEnthusiasm()),

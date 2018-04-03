@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as enzyme from 'enzyme';
 import Hello from './Hello';
 import * as Adapter from 'enzyme-adapter-react-16';
-import { enthusiasm } from './Hello.reducers';
+import { helloReducer } from './Hello.reducers';
 import { incrementEnthusiasm } from './Hello.actions';
 
 enzyme.configure({ adapter: new Adapter() });
@@ -35,6 +35,6 @@ it('throws when the enthusiasm level is negative', () => {
 });
 
 it('reduces correctly', () => {
-    expect(enthusiasm({ languageName: 'TypeScript', enthusiasmLevel: 1 }, incrementEnthusiasm()))
+    expect(helloReducer({ languageName: 'TypeScript', enthusiasmLevel: 1 }, incrementEnthusiasm()))
         .toEqual({ languageName: 'TypeScript', enthusiasmLevel: 2 });
 });

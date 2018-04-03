@@ -13,7 +13,7 @@ import * as LogRocket from 'logrocket';
 import DevTools from './dev-tools';
 
 import reducers from './store/reducers';
-import { StoreState, initialState } from './store';
+import { StoreState } from './store';
 
 import App from './App';
 
@@ -33,7 +33,7 @@ const enhancer = compose(
   DevTools.instrument(),
 );
 
-const store = createStore<StoreState>(connectRouter(history)(reducers), initialState, enhancer);
+const store = createStore<StoreState>(connectRouter(history)(reducers), enhancer);
 
 if (module.hot) {
   module.hot.accept(['./store/reducers'], () => {
