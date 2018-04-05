@@ -1,3 +1,5 @@
+import App from './App/App.container';
+
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
@@ -14,8 +16,6 @@ import DevTools, { getDebugSessionKey } from './dev/dev-tools';
 import reduxFreeze from 'redux-freeze';
 
 import { reducers, dispatchFunctionsFactory } from './store/reducer';
-
-import App from './App';
 
 import './index.css';
 import { StoreBuilder } from './store/utilities';

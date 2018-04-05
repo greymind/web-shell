@@ -1,12 +1,11 @@
-import { hot } from 'react-hot-loader';
 import * as React from 'react';
 import './App.css';
 import { Link, Route } from 'react-router-dom';
-import Hello from './Hello/Hello.container';
-import Goodbye from './Goodbye/Goodbye';
-import { isDevMode } from './helpers/utilities';
+import Hello from '../Hello/Hello.container';
+import Goodbye from '../Goodbye/Goodbye';
+import { isDevMode } from '../helpers/utilities';
 
-const logo = require('./logo.svg');
+const logo = require('../logo.svg');
 
 const App = () => {
   return (
@@ -14,7 +13,7 @@ const App = () => {
       <nav>
         <Link to="/hello">Hello</Link>
         &nbsp;
-          <Link to="/goodbye">Goodbye</Link>
+          <Link to="/goodbye">Goodbye</Link> 
       </nav>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
@@ -34,5 +33,4 @@ const App = () => {
   );
 };
 
-const HotApp = hot(module)(App);
-export default HotApp;
+export default App;
