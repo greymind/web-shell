@@ -1,21 +1,24 @@
 import * as React from 'react';
 import './Hello.css';
-import { helloReducer, HelloState } from './Hello.reducers';
+import { helloReducer } from './Hello.reducers';
 
 export type Dispatch = typeof helloReducer.__dispatchType;
 
-export type Props = HelloState & Dispatch;
+export type Props = {
+  name: string;
+  level: number;
+} & Dispatch;
 
 class Hello extends React.Component<Props> {
   render() {
-    if (this.props.enthusiasmLevel <= 0) {
+    if (this.props.level <= 0) {
       throw new Error('You could be a little more enthusiastic. :D');
     }
 
     return (
       <div className="hello">
         <div className="greeting">
-          Hello {this.props.languageName + getExclamationMarks(this.props.enthusiasmLevel)}
+          Hello {this.props.name + getExclamationMarks(this.props.level)}
         </div>
         <div>
           <button onClick={this.props.decrementEnthusiasm}>-</button>
