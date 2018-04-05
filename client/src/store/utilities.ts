@@ -7,6 +7,7 @@
 
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { connect as redux_connect } from 'react-redux';
+// import reduceReducers from 'reduce-reducers';
 
 export type Intersect<X, Y> = {[K in keyof (X & Y)]: (X & Y)[K]};
 
