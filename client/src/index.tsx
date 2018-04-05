@@ -1,4 +1,3 @@
-import { hot } from 'react-hot-loader';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
@@ -34,7 +33,7 @@ const enhancer = compose(
     LogRocket.reduxMiddleware()
   ) as (next: StoreEnhancerStoreCreator<StoreState>) => StoreEnhancerStoreCreator<StoreState>,
   DevTools.instrument(),
-  persistState(getDebugSessionKey())
+  persistState(getDebugSessionKey()),
 );
 
 const store = createStore<StoreState>(connectRouter(history)(rootReducer), enhancer);
@@ -48,13 +47,11 @@ if (module.hot) {
 // tslint:disable-next-line:no-console
 // history.listen((location) => console.log(location));
 
-const HotApp = hot(module)(App);
-
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <div>
-        <HotApp />
+        <App />
         <DevTools />
       </div>
     </ConnectedRouter>
