@@ -1,22 +1,21 @@
-import { INCREMENT_ENTHUSIASM, DECREMENT_ENTHUSIASM, EnthusiasmAction } from './Hello.actions';
+import { createReducer } from '../store/utilities';
 
 export interface HelloState {
     enthusiasmLevel: number;
     languageName: string;
 }
 
-const defaultState = {
+const defaultState: HelloState = {
     enthusiasmLevel: 1,
     languageName: 'TypeScript Local Initial',
 };
 
-export function helloReducer(state: HelloState = defaultState, action: EnthusiasmAction): HelloState {
-    switch (action.type) {
-        case INCREMENT_ENTHUSIASM:
-            return { ...state, enthusiasmLevel: state.enthusiasmLevel + 1 };
-        case DECREMENT_ENTHUSIASM:
-            return { ...state, enthusiasmLevel: Math.max(1, state.enthusiasmLevel - 1) };
-        default:
-            return state;
-    }
-}
+export const helloReducer = createReducer(defaultState)
+    .addHandler(
+        'incrementEnthusiasm',
+        (state) => ({ ...state, enthusiasmLevel: state.enthusiasmLevel + 1 })
+    )
+    .addSetter(
+        'decrementEnthusiasm',
+        state => ({ ...state, enthusiasmLevel: Math.max(1, state.enthusiasmLevel - 1) })
+    );

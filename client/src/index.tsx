@@ -13,12 +13,13 @@ import { persistState } from 'redux-devtools';
 import DevTools, { getDebugSessionKey } from './dev-tools';
 import reduxFreeze from 'redux-freeze';
 
-import rootReducer from './store/reducer';
+import { reducers, dispatchFunctionsFactory } from './store/reducer';
 import { StoreState } from './store';
 
 import App from './App';
 
 import './index.css';
+import { StoreBuilder } from './store/utilities';
 
 LogRocket.init('jqnfct/web-shell-dev');
 
@@ -36,11 +37,13 @@ const enhancer = compose(
   persistState(getDebugSessionKey()),
 );
 
-const store = createStore<StoreState>(connectRouter(history)(rootReducer), enhancer);
+const store = createStore<StoreState>(connectRouter(history)(reducers), enhancer);
+StoreBuilder.hydrateDispatchers(store, dispatchFunctionsFactory);
 
 if (module.hot) {
   module.hot.accept(['./store/reducer'], () => {
-    store.replaceReducer(connectRouter(history)(rootReducer));
+    store.replaceReducer(connectRouter(history)(reducers));
+    StoreBuilder.hydrateDispatchers(store, dispatchFunctionsFactory);
   });
 }
 

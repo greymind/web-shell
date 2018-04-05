@@ -1,11 +1,8 @@
-import { combineReducers } from 'redux';
-import { StoreState } from '.';
-import { helloReducer, HelloState } from '../Hello/Hello.reducers';
+// import { combineReducers } from 'redux';
+// import { StoreState } from '.';
+import { helloReducer } from '../Hello/Hello.reducers';
+import { StoreBuilder } from './utilities';
 
-const rootReducer = combineReducers<StoreState>({
-    app: combineReducers<HelloState>({
-        hello: helloReducer
-    }),
-});
-
-export default rootReducer;
+export const { reducers, dispatchFunctionsFactory } = new StoreBuilder()
+    .addReducer('hello', helloReducer)
+    .buildReducers();
