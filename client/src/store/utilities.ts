@@ -8,8 +8,6 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { connect as redux_connect } from 'react-redux';
 
-// enum ReducerTypes { Setter, Handler }
-
 export type Intersect<X, Y> = {[K in keyof (X & Y)]: (X & Y)[K]};
 
 export type Store<STATE, DISPATCH> = {
@@ -53,8 +51,8 @@ export type Reducer<REDUCER_STATE, REDUCER_DISPATCH = {}> = {
 
 export const createReducer = <REDUCER_STATE>(initialState: REDUCER_STATE): Reducer<REDUCER_STATE> => {
     const reducer: { [key: string]: any } = {};
-
     let result: any;
+
     const addHandler = (name: string, handler: (state: REDUCER_STATE, payload?: any) => any) => {
         reducer[name] = handler;
         return result;
@@ -106,6 +104,9 @@ export class StoreBuilder<STORE_STATE = {}, STORE_DISPATCH = DEFAULT_STORE_DISPA
         return store;
     }
 
+    // This function is exposed for hot reloading and rebuilding the dispatchers
+    // It is okay to call it on an already enhanced store.dispatch since we only
+    //   add or replace keys
     public static enhanceDispatcher(store: any, dispatchFunctionsFactory: any) {
         store.dispatch = dispatchFunctionsFactory(store);
     }
@@ -137,6 +138,9 @@ export class StoreBuilder<STORE_STATE = {}, STORE_DISPATCH = DEFAULT_STORE_DISPA
     }
 
     private static make_action_creator<T>(type: string, numberOfArguments: number): any {
+        // If the handler doesn't define a payload, then we shouldn't send it
+        // This was done because for React events, the payload can be the event object
+        //   and that fires a SyntheticEvent warning
         const result = numberOfArguments > 1
             ? (payload: T): any => ({ type, payload })
             : (): any => ({ type });
