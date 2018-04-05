@@ -10,7 +10,7 @@ import { connectRouter, routerMiddleware, ConnectedRouter } from 'connected-reac
 
 import * as LogRocket from 'logrocket';
 import { persistState } from 'redux-devtools';
-import DevTools, { getDebugSessionKey } from './dev-tools';
+import DevTools, { getDebugSessionKey } from './dev/dev-tools';
 import reduxFreeze from 'redux-freeze';
 
 import { reducers, dispatchFunctionsFactory } from './store/reducer';
