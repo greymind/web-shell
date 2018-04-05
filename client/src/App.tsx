@@ -4,7 +4,7 @@ import './App.css';
 import { Link, Route } from 'react-router-dom';
 import Hello from './Hello/Hello.container';
 import Goodbye from './Goodbye/Goodbye';
-import { isDevMode } from './utils';
+import { isDevMode } from './utilities';
 
 const logo = require('./logo.svg');
 

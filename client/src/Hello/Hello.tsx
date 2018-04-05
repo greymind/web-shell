@@ -1,8 +1,6 @@
 import * as React from 'react';
 import './Hello.css';
-import { helloReducer } from './Hello.reducers';
-
-export type Dispatch = typeof helloReducer.__dispatchType;
+import { Dispatch } from './Hello.reducers';
 
 export type Props = {
   name: string;

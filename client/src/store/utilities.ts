@@ -106,7 +106,7 @@ export class StoreBuilder<STORE_STATE = {}, STORE_DISPATCH = DEFAULT_STORE_DISPA
         return store;
     }
 
-    public static hydrateDispatchers(store: any, dispatchFunctionsFactory: any) {
+    public static enhanceDispatcher(store: any, dispatchFunctionsFactory: any) {
         store.dispatch = dispatchFunctionsFactory(store);
     }
 

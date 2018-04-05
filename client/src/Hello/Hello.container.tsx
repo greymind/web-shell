@@ -1,8 +1,10 @@
-import Hello, { Props, Dispatch } from './Hello';
+import Hello, { Props } from './Hello';
 import { connect } from '../store/utilities';
-import { StoreState } from '../store';
+import { Dispatch, HelloState } from './Hello.reducers';
 
-export function mapStateToProps({ hello }: StoreState): Partial<Props> {
+export function mapStateToProps(state: { hello: HelloState }): Partial<Props> {
+    const { hello } = state;
+    
     return {
         name: hello.languageName,
         level: hello.enthusiasmLevel

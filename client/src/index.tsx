@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
 
-import { createStore, applyMiddleware, compose, StoreEnhancerStoreCreator } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 
 import createHistory from 'history/createBrowserHistory';
@@ -14,7 +14,6 @@ import DevTools, { getDebugSessionKey } from './dev-tools';
 import reduxFreeze from 'redux-freeze';
 
 import { reducers, dispatchFunctionsFactory } from './store/reducer';
-import { StoreState } from './store';
 
 import App from './App';
 
@@ -32,18 +31,18 @@ const enhancer = compose(
     navigationMiddleware,
     process.env.NODE_ENV !== 'production' ? reduxFreeze : noop => noop,
     LogRocket.reduxMiddleware()
-  ) as (next: StoreEnhancerStoreCreator<StoreState>) => StoreEnhancerStoreCreator<StoreState>,
+  ),
   DevTools.instrument(),
   persistState(getDebugSessionKey()),
 );
 
-const store = createStore<StoreState>(connectRouter(history)(reducers), enhancer);
-StoreBuilder.hydrateDispatchers(store, dispatchFunctionsFactory);
+const store = createStore(connectRouter(history)(reducers), enhancer);
+StoreBuilder.enhanceDispatcher(store, dispatchFunctionsFactory);
 
 if (module.hot) {
   module.hot.accept(['./store/reducer'], () => {
     store.replaceReducer(connectRouter(history)(reducers));
-    StoreBuilder.hydrateDispatchers(store, dispatchFunctionsFactory);
+    StoreBuilder.enhanceDispatcher(store, dispatchFunctionsFactory);
   });
 }
 

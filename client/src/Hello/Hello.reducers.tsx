@@ -11,11 +11,13 @@ const defaultState: HelloState = {
 };
 
 export const helloReducer = createReducer(defaultState)
-    .addHandler(
-        'incrementEnthusiasm',
-        (state) => ({ ...state, enthusiasmLevel: state.enthusiasmLevel + 1 })
-    )
-    .addSetter(
-        'decrementEnthusiasm',
-        state => ({ ...state, enthusiasmLevel: Math.max(1, state.enthusiasmLevel - 1) })
-    );
+    ('incrementEnthusiasm', (state: HelloState) => ({
+        ...state,
+        enthusiasmLevel: state.enthusiasmLevel + 1
+    }))
+    ('decrementEnthusiasm', (state) => ({
+        ...state,
+        enthusiasmLevel: Math.max(1, state.enthusiasmLevel - 1)
+    }));
+
+export type Dispatch = typeof helloReducer.__dispatchType;
