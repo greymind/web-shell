@@ -6,6 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 
 import { createStore, applyMiddleware, compose, StoreEnhancerStoreCreator } from 'redux';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 
 import createHistory from 'history/createBrowserHistory';
 import { connectRouter, routerMiddleware, ConnectedRouter } from 'connected-react-router';
@@ -28,6 +29,7 @@ const navigationMiddleware = routerMiddleware(history);
 
 const enhancer = compose(
   applyMiddleware(
+    thunk,
     navigationMiddleware,
     process.env.NODE_ENV !== 'production' ? reduxFreeze : noop => noop,
     LogRocket.reduxMiddleware()

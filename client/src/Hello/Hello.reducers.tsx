@@ -34,7 +34,6 @@ const defaultState: HelloState = {
     languageName: 'TypeScript Local Initial',
 };
 
-// tslint:disable-next-line:no-any
 export const helloReducer = (state = defaultState, action: HelloAction) => {
     switch (action.type) {
         case IncrementEnthusiasm:
@@ -46,11 +45,6 @@ export const helloReducer = (state = defaultState, action: HelloAction) => {
             return {
                 ...state,
                 enthusiasmLevel: Math.max(1, state.enthusiasmLevel - 1)
-            };
-        case IncrementEnthusiasmTwice:
-            return {
-                ...state,
-                enthusiasmLevel: state.enthusiasmLevel + 1
             };
         default:
             return state;
