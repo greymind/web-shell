@@ -24,6 +24,40 @@ export type Dispatch1<NAME extends string, PAYLOAD> = {
     [name in NAME]: { (payload: PAYLOAD): void; }
 };
 
+export type FullReducer<STORE_STATE, FULL_REDUCER_DISPATCH = {}> = {
+    <REDUCER_NAME extends string>(
+        name: REDUCER_NAME,
+        handler: (state: STORE_STATE) => STORE_STATE
+    ): Reducer<STORE_STATE, Intersect<FULL_REDUCER_DISPATCH, Dispatch0<REDUCER_NAME>>>;
+
+    <REDUCER_NAME extends string, PAYLOAD>(
+        name: REDUCER_NAME,
+        handler: (state: STORE_STATE, payload: PAYLOAD) => STORE_STATE
+    ): Reducer<STORE_STATE, Intersect<FULL_REDUCER_DISPATCH, Dispatch1<REDUCER_NAME, PAYLOAD>>>;
+
+    getInitial(): STORE_STATE;
+    getReducer(): any;
+    __dispatchType: FULL_REDUCER_DISPATCH;
+};
+
+export const createFullReducer = <STORE_STATE>(initialState: STORE_STATE): FullReducer<STORE_STATE> => {
+    const reducer: { [key: string]: any } = {};
+    let result: any;
+
+    const addHandler = (name: string, handler: (state: STORE_STATE, payload?: any) => any) => {
+        reducer[name] = handler;
+        return result;
+    };
+
+    result = addHandler as any;
+    result.addSetter = addHandler;
+    result.addHandler = addHandler;
+    result.getInitial = () => initialState;
+    result.getReducer = () => reducer;
+
+    return result;
+};
+
 export type Reducer<REDUCER_STATE, REDUCER_DISPATCH = {}> = {
     <REDUCER_NAME extends string>(
         name: REDUCER_NAME,
