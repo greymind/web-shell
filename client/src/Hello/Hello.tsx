@@ -1,11 +1,12 @@
 import * as React from 'react';
 import './Hello.css';
-import { Dispatch } from './Hello.reducers';
 
-export type Props = {
+export interface Props {
   name: string;
   level: number;
-} & Dispatch;
+  incrementEnthusiasm(): void;
+  decrementEnthusiasm(): void;
+}
 
 class Hello extends React.Component<Props> {
   render() {

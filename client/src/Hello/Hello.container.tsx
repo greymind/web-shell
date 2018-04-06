@@ -1,18 +1,22 @@
-import Hello, { Props } from './Hello';
-import { connect } from '../store/utilities';
-import { Dispatch, HelloState } from './Hello.reducers';
+import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
 
-export function mapStateToProps(state: { hello: HelloState }): Partial<Props> {
-    const { hello } = state;
-    
+import { StoreState } from '../store/state';
+import Hello, { Props } from './Hello';
+import { incrementEnthusiasm, decrementEnthusiasm } from './Hello.reducers';
+
+export function mapStateToProps({ hello }: StoreState): Partial<Props> {
     return {
         name: hello.languageName,
         level: hello.enthusiasmLevel
     };
 }
 
-export function mapDispatchToProps(dispatch: { hello: Dispatch; }) {
-    return dispatch.hello;
+export function mapDispatchToProps(dispatch: Dispatch<StoreState>, getState: StoreState): Partial<Props> {
+    return {
+        incrementEnthusiasm: () => dispatch(incrementEnthusiasm()),
+        decrementEnthusiasm: () => dispatch(decrementEnthusiasm())
+    };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Hello);
