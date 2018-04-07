@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 
 import { StoreState } from '../store/state';
 import Hello, { Props } from './Hello';
-import { incrementEnthusiasm, decrementEnthusiasm } from './Hello.reducers';
+
+import { incrementEnthusiasm } from './actions/incrementEnthusiasm.action';
+import { decrementEnthusiasm } from './actions/decrementEnthusiasm.action';
 
 export function mapStateToProps({ hello }: StoreState): Partial<Props> {
     return {

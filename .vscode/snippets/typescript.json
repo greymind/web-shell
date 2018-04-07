@@ -1,0 +1,28 @@
+{
+    "Add action": {
+        "prefix": "g_action_reducer",
+        "body": [
+            "import { ${TM_DIRECTORY/(?:.*[\\\\\\/]([^\\\\\\/]+)[\\\\\\/]actions$)/$1/}State } from '../${TM_DIRECTORY/(?:.*[\\\\\\/]([^\\\\\\/]+)[\\\\\\/]actions$)/$1/}.state';",
+            "",
+            "export const _${1:actionName} = '${TM_DIRECTORY/(?:.*[\\\\\\/]([^\\\\\\/]+)[\\\\\\/]actions$)/$1/}/${1}';",
+            "",
+            "export const $1 = () => ({",
+            "    type: _$1,",
+            "});",
+            "",
+            "export const $1Mock = $1();",
+            "",
+            "export const $1Reducer =",
+            "    (state: ${TM_DIRECTORY/(?:.*[\\\\\\/]([^\\\\\\/]+)[\\\\\\/]actions$)/$1/}State, action: typeof $1Mock): ${TM_DIRECTORY/(?:.*[\\\\\\/]([^\\\\\\/]+)[\\\\\\/]actions$)/$1/}State => {",
+            "        if (action.type === _$1) {",
+            "            return {",
+            "                ...state,",
+            "            };",
+            "        }",
+            "",
+            "        return state;",
+            "    };"
+        ],
+        "description": "Add an action and reducer"
+    }
+}
