@@ -1,0 +1,10 @@
+code --install-extension dbalage.vscode-stylesheet-formatter
+code --install-extension donjayamanne.githistory
+code --install-extension DotJoshJohnson.xml
+code --install-extension eg2.tslint
+code --install-extension ms-vscode.csharp
+code --install-extension ms-vscode.PowerShell
+code --install-extension msjsdiag.debugger-for-chrome
+code --install-extension msjsdiag.debugger-for-edge
+code --install-extension rebornix.project-snippets
+code --install-extension robertohuertasm.vscode-icons
