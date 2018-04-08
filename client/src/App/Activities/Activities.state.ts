@@ -33,13 +33,13 @@ export const defaultState: ActivityState = {
             ]
         },
         {
-            id: '0', name: 'Cake', groupId: '0',
+            id: '1', name: 'Cake', groupId: '0',
             turns: [
 
             ]
         },
         {
-            id: '0', name: 'McDonalds', groupId: '1',
+            id: '2', name: 'McDonalds', groupId: '1',
             turns: [
 
             ]

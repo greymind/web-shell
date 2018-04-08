@@ -1,10 +1,7 @@
 import * as React from 'react';
 import List from 'material-ui/List';
 import { Person } from './Person';
-
-export interface PersonInfo {
-    name: string;
-}
+import { PersonInfo } from './People.state';
 
 export interface Props {
     people: PersonInfo[];
@@ -14,7 +11,7 @@ export interface Props {
 export const People = (props: Props) => (
     <List>
         {props.people.map(personInfo => (
-            <Person name={personInfo.name} />
+            <Person key={personInfo.id} name={personInfo.name} />
         ))}
     </List>
 );

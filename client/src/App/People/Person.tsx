@@ -9,7 +9,7 @@ export interface Props {
 }
 
 export const Person = (props: Props) => (
-    <ListItem key={props.name} button={true}>
+    <ListItem button={true}>
         <ListItemIcon>
             <PersonIcon />
         </ListItemIcon>

@@ -9,7 +9,7 @@ export interface Props {
 export default (props: Props) => (
     <List>
         {props.activities.map(activityInfo => (
-            <Activity {...activityInfo} />
+            <Activity key={activityInfo.id} {...activityInfo} />
         ))}
     </List>
 );

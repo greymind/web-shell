@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { withRouter, RouteComponentProps } from 'react-router';
 import Tabs, { Tab } from 'material-ui/Tabs';
+import DocumentTitle from 'react-document-title';
+import SwipeableViews from 'react-swipeable-views';
 
 export interface TabInfo {
     label: string;
@@ -35,15 +37,19 @@ export class TabBarContainer extends React.Component<Props, State> {
         return Math.max(locationTab, firstTab);
     }
 
-    onTabChange = (event: React.ChangeEvent<{}> | null, value: number) => {
-        if (this.state.currentTab === value) { return; }
+    onTabChange = (event: React.ChangeEvent<{}> | null, index: number) => {
+        if (this.state.currentTab === index) { return; }
 
         this.setState({
-            currentTab: value,
+            currentTab: index,
         }, () => {
-            const to = this.props.tabs[value].to;
+            const to = this.props.tabs[index].to;
             this.props.history.push(to);
         });
+    }
+
+    onTabChangeIndex = (index: number) => {
+        this.onTabChange(null, index);
     }
 
     componentWillReceiveProps(nextProps: Props) {
@@ -58,11 +64,32 @@ export class TabBarContainer extends React.Component<Props, State> {
 
     render() {
         return (
-            <Tabs value={this.state.currentTab} onChange={this.onTabChange} centered={true}>
-                {this.props.tabs.map(tabInfo => (
-                    <Tab label={tabInfo.label} />
-                ))}
-            </Tabs>
+            <div>
+                <Tabs value={this.state.currentTab} onChange={this.onTabChange} fullWidth={true}>
+                    {this.props.tabs.map(tabInfo => (
+                        <Tab key={tabInfo.label} label={tabInfo.label} />
+                    ))}
+                </Tabs>
+                <div>
+                    <SwipeableViews
+                        axis="x"
+                        index={this.state.currentTab}
+                        onChangeIndex={this.onTabChangeIndex}
+                    >
+                        {this.props.tabs.map(tabInfo => (
+                            // <Route
+                            //     key={tabInfo.label}
+                            //     path={tabInfo.to}
+                            //     render={() =>
+                            <DocumentTitle title={`${tabInfo.label} | Greymind Turns`}>
+                                <tabInfo.component />
+                            </DocumentTitle>
+                            // }
+                            // />
+                        ))}
+                    </SwipeableViews>
+                </div>
+            </div>
         );
     }
 }

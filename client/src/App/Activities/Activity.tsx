@@ -10,7 +10,7 @@ export interface Props extends ActivityInfo {
 }
 
 export default (props: Props) => (
-    <ListItem key={props.name} button={true}>
+    <ListItem button={true}>
         <ListItemIcon>
             <GroupWorkIcon />
         </ListItemIcon>

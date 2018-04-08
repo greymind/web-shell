@@ -1,10 +1,10 @@
-export interface Person {
+export interface PersonInfo {
     id: string;
     name: string;
 }
 
 export interface PeopleState {
-    people: Person[];
+    people: PersonInfo[];
 }
 
 export const defaultState: PeopleState = {

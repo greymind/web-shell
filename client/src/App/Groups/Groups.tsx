@@ -9,7 +9,7 @@ export interface Props {
 export default (props: Props) => (
     <List>
         {props.groups.map(groupInfo => (
-            <Group {...groupInfo} />
+            <Group key={groupInfo.id} {...groupInfo} />
         ))}
     </List>
 );

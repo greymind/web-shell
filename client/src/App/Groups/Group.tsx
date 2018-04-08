@@ -9,7 +9,7 @@ export interface Props extends GroupInfo {
 }
 
 export default (props: Props) => (
-    <ListItem key={props.name} button={true}>
+    <ListItem button={true}>
         <ListItemIcon>
             <GroupIcon />
         </ListItemIcon>
