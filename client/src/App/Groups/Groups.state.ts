@@ -1,7 +1,7 @@
 export interface GroupInfo {
     id: string;
     name: string;
-    people: string[];
+    peopleIds: string[];
 }
 
 export interface GroupState {
@@ -10,7 +10,7 @@ export interface GroupState {
 
 export const defaultState: GroupState = {
     groups: [
-        { id: '0', name: 'Burek', people: ['0', '1', '2', '3'] },
-        { id: '1', name: 'Unicorns', people: ['0', '4'] }
+        { id: '0', name: 'Burek', peopleIds: ['0', '1', '2', '3'] },
+        { id: '1', name: 'Unicorns', peopleIds: ['0', '4'] }
     ]
 };

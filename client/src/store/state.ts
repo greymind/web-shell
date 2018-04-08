@@ -1,7 +1,9 @@
 import { PeopleState } from '../App/People/People.state';
-import { GroupState } from '../App/Group/Group.state';
+import { GroupState } from '../App/Groups/Groups.state';
+import { ActivityState } from '../App/Activities/Activities.state';
 
 export interface StoreState {
     people: PeopleState;
-    group: GroupState;
+    groups: GroupState;
+    activities: ActivityState;
 }

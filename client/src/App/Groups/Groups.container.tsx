@@ -5,12 +5,12 @@ import { StoreState } from '../../store/state';
 import Group, { Props } from './Groups';
 
 function mapStateToProps(state: StoreState, ownProps: Props): Partial<Props> {
-    const { group, people: { people } } = state;
+    const { groups: { groups }, people: { people } } = state;
 
     return {
-        groups: group.groups.map(groupInfo => ({
+        groups: groups.map(groupInfo => ({
             ...groupInfo,
-            peopleNames: groupInfo.people
+            peopleNames: groupInfo.peopleIds
                 .map(personId => people.find(p => p.id === personId)!.name)
         }))
     };

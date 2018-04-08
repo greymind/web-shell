@@ -3,13 +3,13 @@ import './App.css';
 import { Header } from 'semantic-ui-react';
 import TabBar from './TabBar/TabBar.container';
 import { TabInfo } from './TabBar/TabBar';
-import Activities from './Activity/Activities';
-import Groups from './Group/Groups.container';
+import Activity from './Activities/Activities.container';
+import Groups from './Groups/Groups.container';
 import People from './People/People.container';
 
 const App = () => {
   const tabs: TabInfo[] = [
-    { name: 'activities', label: 'Activities', to: '/activities', component: Activities },
+    { name: 'activities', label: 'Activities', to: '/activities', component: Activity },
     { name: 'groups', label: 'Groups', to: '/groups', component: Groups },
     { name: 'people', label: 'People', to: '/people', component: People }
   ];

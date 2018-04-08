@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { GroupInfo } from './Group.state';
+import { GroupInfo } from './Groups.state';
 import { List } from 'semantic-ui-react';
 import './Group.css';
 
