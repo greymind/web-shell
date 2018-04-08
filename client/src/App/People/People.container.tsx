@@ -1,4 +1,4 @@
-// import { Dispatch } from 'redux';
+import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 
 import { StoreState } from '../../store/state';
@@ -10,10 +10,8 @@ function mapStateToProps({ people }: StoreState, ownProps: Props): Partial<Props
     };
 }
 
-// function mapDispatchToProps(dispatch: Dispatch<StoreState>, getState: StoreState): Partial<Props> {
-//     return {
+function mapDispatchToProps(dispatch: Dispatch<StoreState>, ownProps: Props): Partial<Props> {
+    return {};
+}
 
-//     };
-// }
-
-export default connect(mapStateToProps)(People);
+export default connect(mapStateToProps, mapDispatchToProps)(People);
