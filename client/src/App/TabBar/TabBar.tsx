@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Tab } from './Tab';
-import { Menu, SemanticWIDTHS, Segment } from 'semantic-ui-react';
+import { Menu, SemanticWIDTHS } from 'semantic-ui-react';
 import { Route, RouteComponentProps } from 'react-router';
 
 export interface TabInfo {
@@ -33,11 +33,11 @@ export const TabBar = (props: Props) => {
                 ))}
             </Menu>
 
-            <Segment>
+            <div>
                 {props.tabs.map(tabInfo => (
                     <Route path={tabInfo.to} component={tabInfo.component} />
                 ))}
-            </Segment>
+            </div>
         </div>
     );
 };
