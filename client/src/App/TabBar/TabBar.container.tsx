@@ -16,21 +16,33 @@ export class TabBarContainer extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
 
+        this.state = {
+            currentTab: this.getCurrentTabBasedOnLocation(props)
+        };
+    }
+
+    getCurrentTabBasedOnLocation(props: Props) {
         const firstTab = props.tabs[0];
 
         const locationTab = props.tabs.find(tabInfo => {
             return tabInfo.to === props.location.pathname;
         }) || firstTab;
 
-        this.state = {
-            currentTab: locationTab.name
-        };
+        return locationTab.name;
     }
 
     onTabClick = (name: string) => {
         this.setState({
             currentTab: name,
         });
+    }
+
+    componentWillReceiveProps(nextProps: Props) {
+        if (nextProps !== this.props) {
+            this.setState({
+                currentTab: this.getCurrentTabBasedOnLocation(nextProps)
+            });
+        }
     }
 
     render() {
