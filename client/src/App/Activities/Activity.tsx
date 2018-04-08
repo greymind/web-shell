@@ -5,7 +5,7 @@ import './Activity.css';
 
 export interface Props extends ActivityInfo {
     groupName: string;
-    lastTurnAt: string;
+    lastTurnAt: number;
 }
 
 export const Activity = (props: Props) => (
