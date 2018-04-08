@@ -15,22 +15,32 @@ import { connectRouter, routerMiddleware, ConnectedRouter } from 'connected-reac
 import * as LogRocket from 'logrocket';
 import { persistState } from 'redux-devtools';
 import DevTools, { getDebugSessionKey } from './dev/dev-tools';
-import reduxFreeze from 'redux-freeze';
 
 import { StoreState } from './store/state';
 import { rootReducer } from './store/reducer';
 
 import 'typeface-roboto';
+import { isDevMode } from './helpers/utilities';
 
 LogRocket.init('jqnfct/web-shell-dev');
 
 const navigationMiddleware = routerMiddleware(history);
 
+const middleware = [
+  thunk,
+  navigationMiddleware,
+];
+
+const devMiddleware = [];
+if (isDevMode()) {
+  const reduxFreeze = require('redux-freeze');
+  devMiddleware.push(reduxFreeze);
+}
+
 const enhancer = compose(
   applyMiddleware(
-    thunk,
-    navigationMiddleware,
-    process.env.NODE_ENV !== 'production' ? reduxFreeze : noop => noop,
+    ...middleware,
+    ...devMiddleware,
     LogRocket.reduxMiddleware()
   ) as (next: StoreEnhancerStoreCreator<StoreState>) => StoreEnhancerStoreCreator<StoreState>,
   DevTools.instrument(),

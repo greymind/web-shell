@@ -28,7 +28,8 @@ const styles: StyleRulesCallback<'app'> = theme => ({
   },
   content: {
     order: '2',
-    overflowY: 'scroll'
+    overflowY: 'scroll',
+    flexGrow: '1'
   },
   long: {
     height: '900px',
