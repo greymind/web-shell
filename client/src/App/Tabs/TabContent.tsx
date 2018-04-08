@@ -11,7 +11,7 @@ export interface Props {
 
 export default (props: Props) => {
     const style: React.CSSProperties = {
-        // overflowY: 'scroll'
+        height: '100%'
     };
 
     const onTabIndexChange = (index: number) => {
