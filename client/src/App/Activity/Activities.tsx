@@ -6,3 +6,5 @@ export interface Props {
 export const Activities = (props: Props) => (
     <div>Activities</div>
 );
+
+export default Activities;

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { List } from 'semantic-ui-react';
-import './People.css';
 import { Person } from './Person';
 
 export interface PersonInfo {
@@ -18,3 +17,5 @@ export const People = (props: Props) => (
         ))}
     </List>
 );
+
+export default People;

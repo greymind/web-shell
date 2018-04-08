@@ -9,7 +9,9 @@
             "",
             "export const ${TM_FILENAME/(.*)\\..+$/$1/} = (props: Props) => (",
             "    <div>${TM_FILENAME/(.*)\\..+$/$1/}$0</div>",
-            ");"
+            ");",
+            "",
+            "export default ${TM_FILENAME/(.*)\\..+$/$1/};"
         ],
         "description": "Functional component"
     },
@@ -18,14 +20,16 @@
         "body": [
             "import * as React from 'react';",
             "",
-            "import { ${TM_FILENAME/(.*)\\.container\\..+$/$1/}, Props as ${TM_FILENAME/(.*)\\.container\\..+$/$1/}Props } from './${TM_FILENAME/(.*)\\.container\\..+$/$1/}';",
+            "import ${TM_FILENAME/(.*)\\.container\\..+$/$1/}, { Props as ${TM_FILENAME/(.*)\\.container\\..+$/$1/}Props } from './${TM_FILENAME/(.*)\\.container\\..+$/$1/}';",
             "",
             "export interface Props extends ${TM_FILENAME/(.*)\\.container\\..+$/$1/}Props {",
             "}",
             "",
             "export const ${TM_FILENAME/(.*)\\.container\\..+$/$1/}Container = (props: Props) => (",
             "    <${TM_FILENAME/(.*)\\.container\\..+$/$1/} {...props}$0 />",
-            ");"
+            ");",
+            "",
+            "export default ${TM_FILENAME/(.*)\\.container\\..+$/$1/}Container;"
         ],
         "description": "Functional container component"
     },
@@ -33,7 +37,7 @@
         "prefix": "g_class_container_component",
         "body": [
             "import * as React from 'react';",
-            "import { ${TM_FILENAME/(.*)\\.container\\..+$/$1/}, Props as ${TM_FILENAME/(.*)\\.container\\..+$/$1/}Props } from './${TM_FILENAME/(.*)\\.container\\..+$/$1/}';",
+            "import ${TM_FILENAME/(.*)\\.container\\..+$/$1/}, { Props as ${TM_FILENAME/(.*)\\.container\\..+$/$1/}Props } from './${TM_FILENAME/(.*)\\.container\\..+$/$1/}';",
             "",
             "export interface Props extends ${TM_FILENAME/(.*)\\.container\\..+$/$1/}Props { }",
             "",
@@ -51,8 +55,33 @@
             "            <${TM_FILENAME/(.*)\\.container\\..+$/$1/} {...this.props}$0 />",
             "        );",
             "    }",
-            "}"
+            "}",
+            "",
+            "export default ${TM_FILENAME/(.*)\\.container\\..+$/$1/}Container;"
         ],
         "description": "Class container component"
+    },
+    "Connected container component": {
+        "prefix": "g_connected_container",
+        "body": [
+            "import { Dispatch } from 'redux';",
+            "import { connect } from 'react-redux';",
+            "",
+            "import { StoreState } from '../../store/state';",
+            "import ${TM_FILENAME/(.*)\\.container\\..+$/$1/}, { Props } from './${TM_FILENAME/(.*)\\.container\\..+$/$1/}';",
+            "",
+            "function mapStateToProps({ ${1:state} }: StoreState, ownProps: Props): Partial<Props> {",
+            "    return {",
+            "        ...$1",
+            "    };",
+            "}",
+            "",
+            "function mapDispatchToProps(dispatch: Dispatch<StoreState>, ownProps: Props): Partial<Props> {",
+            "    return {};",
+            "}",
+            "",
+            "export default connect(mapStateToProps, mapDispatchToProps)(${TM_FILENAME/(.*)\\.container\\..+$/$1/});"
+        ],
+        "description": "Connected container component"
     }
 }

@@ -3,8 +3,8 @@ import './App.css';
 import { Header } from 'semantic-ui-react';
 import TabBar from './TabBar/TabBar.container';
 import { TabInfo } from './TabBar/TabBar';
-import { Activities } from './Activity/Activities';
-import { Groups } from './Group/Groups';
+import Activities from './Activity/Activities';
+import Groups from './Group/Groups.container';
 import People from './People/People.container';
 
 const App = () => {

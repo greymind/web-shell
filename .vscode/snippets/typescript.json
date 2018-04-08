@@ -1,5 +1,5 @@
 {
-    "Add action": {
+    "Add action and action reducer": {
         "prefix": "g_action_reducer",
         "body": [
             "import { ${TM_DIRECTORY/(?:.*[\\\\\\/]([^\\\\\\/]+)[\\\\\\/]actions$)/$1/}State } from '../${TM_DIRECTORY/(?:.*[\\\\\\/]([^\\\\\\/]+)[\\\\\\/]actions$)/$1/}.state';",
@@ -23,6 +23,18 @@
             "        return state;",
             "    };"
         ],
-        "description": "Add an action and reducer"
+        "description": "Add action and action reducer"
+    },
+    "Add slice reducer": {
+        "prefix": "g_slice_reducer",
+        "body": [
+            "import reduceReducer from 'reduce-reducers';",
+            "import { defaultState } from './${TM_DIRECTORY/(?:.*[\\\\\\/]([^\\\\\\/]+)$)/$1/}.state';",
+            "",
+            "export const reducer = reduceReducer(",
+            "    (s = defaultState, a) => s,",
+            ");"
+        ],
+        "description": "Add slice reducer"
     }
 }
