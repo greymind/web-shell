@@ -9,7 +9,7 @@ export interface Props extends GroupInfo {
 
 export const Group = (props: Props) => (
     <List.Item className="Group-list-item">
-        <List.Icon circular={true} name="group" />
+        <List.Icon name="group" />
         <List.Content>
             <List.Header>{props.name}</List.Header>
             <List.Description>{props.peopleNames.join(', ')}</List.Description>
