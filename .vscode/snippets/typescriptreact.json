@@ -7,11 +7,9 @@
             "export interface Props {",
             "}",
             "",
-            "export const ${TM_FILENAME/(.*)\\..+$/$1/} = (props: Props) => (",
+            "export default (props: Props) => (",
             "    <div>${TM_FILENAME/(.*)\\..+$/$1/}$0</div>",
-            ");",
-            "",
-            "export default ${TM_FILENAME/(.*)\\..+$/$1/};"
+            ");"
         ],
         "description": "Functional component"
     },
@@ -25,11 +23,9 @@
             "export interface Props extends ${TM_FILENAME/(.*)\\.container\\..+$/$1/}Props {",
             "}",
             "",
-            "export const ${TM_FILENAME/(.*)\\.container\\..+$/$1/}Container = (props: Props) => (",
+            "export default (props: Props) => (",
             "    <${TM_FILENAME/(.*)\\.container\\..+$/$1/} {...props}$0 />",
-            ");",
-            "",
-            "export default ${TM_FILENAME/(.*)\\.container\\..+$/$1/}Container;"
+            ");"
         ],
         "description": "Functional container component"
     },

@@ -1,27 +1,52 @@
-import * as React from 'react';
 import './App.css';
-import { Header } from 'semantic-ui-react';
-import TabBar from './TabBar/TabBar.container';
-import { TabInfo } from './TabBar/TabBar';
+import * as React from 'react';
+import { Route } from 'react-router';
+
+import Tabs, { TabInfo } from './Tabs/Tabs.container';
+
+import withStyles, { WithStyles, StyleRulesCallback } from 'material-ui/styles/withStyles';
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import Typography from 'material-ui/Typography';
+
 import Activity from './Activities/Activities.container';
 import Groups from './Groups/Groups.container';
 import People from './People/People.container';
+import withRoot from '../helpers/withRoot';
 
-const App = () => {
+const styles: StyleRulesCallback<'app'> = theme => ({
+  app: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.paper,
+  },
+});
+
+const App = (props: WithStyles<'app'>) => {
+  const { classes } = props;
+
   const tabs: TabInfo[] = [
-    { name: 'activities', label: 'Activities', to: '/activities', component: Activity },
-    { name: 'groups', label: 'Groups', to: '/groups', component: Groups },
-    { name: 'people', label: 'People', to: '/people', component: People }
+    { label: 'Activities', to: '/activities', component: Activity },
+    { label: 'Groups', to: '/groups', component: Groups },
+    { label: 'People', to: '/people', component: People }
   ];
 
   return (
-    <div className="App">
-      <div className="App-header">
-        <Header inverted={true} as="h1">Greymind Turns</Header>
+    <div className={classes.app}>
+      <AppBar position="static" color="default">
+        <Toolbar>
+          <Typography variant="title" color="inherit">
+            Greymind Turns
+            </Typography>
+        </Toolbar>
+      </AppBar>
+      <Tabs tabs={tabs} />
+      <div>
+        {tabs.map(tabInfo => (
+          <Route path={tabInfo.to} component={tabInfo.component} />
+        ))}
       </div>
-      <TabBar tabs={tabs} widths="3" />
     </div>
   );
 };
 
-export default App;
+export default withRoot(withStyles(styles)<{}>(App));

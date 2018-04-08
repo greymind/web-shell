@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { List } from 'semantic-ui-react';
+import List from 'material-ui/List';
 import { Person } from './Person';
 
 export interface PersonInfo {
@@ -11,7 +11,7 @@ export interface Props {
 }
 
 export const People = (props: Props) => (
-    <List relaxed="very" verticalAlign="middle" size="big" selection={true} >
+    <List>
         {props.people.map(personInfo => (
             <Person name={personInfo.name} />
         ))}

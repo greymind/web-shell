@@ -1,20 +1,18 @@
+import './Group.css';
 import * as React from 'react';
 import { GroupInfo } from './Groups.state';
-import { List } from 'semantic-ui-react';
-import './Group.css';
+import { ListItem, ListItemIcon, ListItemText } from 'material-ui';
+import GroupIcon from '@material-ui/icons/Group';
 
 export interface Props extends GroupInfo {
     peopleNames: string[];
 }
 
-export const Group = (props: Props) => (
-    <List.Item className="Group-list-item">
-        <List.Icon name="group" />
-        <List.Content>
-            <List.Header>{props.name}</List.Header>
-            <List.Description>{props.peopleNames.join(', ')}</List.Description>
-        </List.Content>
-    </List.Item>
+export default (props: Props) => (
+    <ListItem key={props.name} button={true}>
+        <ListItemIcon>
+            <GroupIcon />
+        </ListItemIcon>
+        <ListItemText primary={props.name} secondary={props.peopleNames.join(', ')} />
+    </ListItem>
 );
-
-export default Group;

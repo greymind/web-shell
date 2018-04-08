@@ -1,16 +1,18 @@
-import * as React from 'react';
-import { List } from 'semantic-ui-react';
 import './People.css';
+import * as React from 'react';
+import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
+import PersonIcon from '@material-ui/icons/Person';
+// import Avatar from 'material-ui/Avatar';
 
 export interface Props {
     name: string;
 }
 
 export const Person = (props: Props) => (
-    <List.Item className="People-list-item">
-        <List.Icon circular={true} name="user" />
-        <List.Content>
-            <List.Header>{props.name}</List.Header>
-        </List.Content>
-    </List.Item>
+    <ListItem key={props.name} button={true}>
+        <ListItemIcon>
+            <PersonIcon />
+        </ListItemIcon>
+        <ListItemText primary={props.name} />
+    </ListItem>
 );
