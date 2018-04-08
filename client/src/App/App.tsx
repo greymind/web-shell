@@ -12,15 +12,33 @@ import Activity from './Activities/Activities.container';
 import Groups from './Groups/Groups.container';
 import People from './People/People.container';
 
-import Tabs, { TabInfo } from './Tabs/Tabs.container';
+import Tabs from './Tabs/Tabs.container';
+import { TabInfo } from './Tabs/TabInfo';
+import Navigator from './Tabs/Navigator.container';
+import TabContent from './Tabs/TabContent.container';
 
 const styles: StyleRulesCallback<'app'> = theme => ({
   app: {
     height: '100%',
+    display: 'flex',
+    flexDirection: 'column'
   },
+  appbar: {
+    order: '1',
+  },
+  content: {
+    order: '2',
+    overflowY: 'scroll'
+  },
+  long: {
+    height: '900px',
+    backgroundColor: 'teal'
+  } as React.CSSProperties
 });
 
-const App = (props: WithStyles<'app'>) => {
+type WithStylesKeys = 'app' | 'appbar' | 'content' | 'long';
+
+const App = (props: WithStyles<WithStylesKeys>) => {
   const { classes } = props;
 
   const tabs: TabInfo[] = [
@@ -29,17 +47,29 @@ const App = (props: WithStyles<'app'>) => {
     { label: 'People', to: '/people', component: People }
   ];
 
+  // const tabComponents = {
+  //   'Activities': Activity,
+  //   'Groups': Groups,
+  //   'People': People,
+  // };
+
   return (
     <Paper className={classes.app}>
-      <AppBar position="static" color="default">
-        <Toolbar>
-          <Typography variant="title" color="inherit">
-            Greymind Turns
+      <div className={classes.appbar}>
+        <AppBar position="static" color="default">
+          <Toolbar>
+            <Typography variant="title" color="inherit">
+              Greymind Turns
             </Typography>
-        </Toolbar>
-      </AppBar>
-      <Tabs tabs={tabs} />
-    </Paper>
+          </Toolbar>
+        </AppBar>
+        <Tabs tabs={tabs} />
+        <Navigator tabs={tabs} />
+      </div>
+      <div className={classes.content}>
+        <TabContent tabs={tabs} />
+      </div>
+    </Paper >
   );
 };
 

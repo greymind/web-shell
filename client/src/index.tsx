@@ -9,7 +9,7 @@ import { createStore, applyMiddleware, compose, StoreEnhancerStoreCreator } from
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
-import createHistory from 'history/createBrowserHistory';
+import history from './helpers/history';
 import { connectRouter, routerMiddleware, ConnectedRouter } from 'connected-react-router';
 
 import * as LogRocket from 'logrocket';
@@ -23,8 +23,6 @@ import { rootReducer } from './store/reducer';
 import 'typeface-roboto';
 
 LogRocket.init('jqnfct/web-shell-dev');
-
-const history = createHistory();
 
 const navigationMiddleware = routerMiddleware(history);
 

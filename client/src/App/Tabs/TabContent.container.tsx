@@ -1,7 +1,8 @@
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
+
 import { StoreState } from '../../store/state';
-import Tabs, { Props } from './Tabs';
+import TabContent, { Props } from './TabContent';
 
 import { changeTabAndLocation } from './actions/Tabs.changeTab';
 
@@ -20,4 +21,4 @@ function mapDispatchToProps(dispatch: Dispatch<StoreState>, ownProps: Props): Pa
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Tabs);
+export default connect(mapStateToProps, mapDispatchToProps)(TabContent);

@@ -4,11 +4,11 @@ export interface GroupInfo {
     peopleIds: string[];
 }
 
-export interface GroupState {
+export default interface GroupsState {
     groups: GroupInfo[];
 }
 
-export const defaultState: GroupState = {
+export const defaultState: GroupsState = {
     groups: [
         { id: '0', name: 'Burek', peopleIds: ['0', '1', '2', '3'] },
         { id: '1', name: 'Unicorns', peopleIds: ['0', '4'] }

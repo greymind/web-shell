@@ -1,0 +1,89 @@
+<html>
+
+    <head>
+        <style>
+            .container {
+                display: flex;
+                height: 100%;
+                flex-direction: column;
+            }
+
+            .top {
+                background: red;
+                /* height: 100px; */
+                /* grid-area: 1/1/1/1; */
+                order: 1;
+            }
+
+            .topcontent {
+                background: orange;
+                height: 100px;
+            }
+
+            .bottom {
+                /* padding-bottom: 20000px;
+                margin-bottom: -20000px; */
+                /* overflow-y: scroll; */
+                background: green;
+                /* height: 100px; */
+                /* grid-area: 2/1/10/1; */
+                order: 2;
+                /* flex-grow: 1; */
+            }
+
+            .inter {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .bottomHeader {
+                height: 50px;
+                background: gold;
+                order: 1;
+            }
+
+            .bottomFooter {
+                background: black;
+                overflow-y: scroll;
+                order: 2;
+                flex-grow: 1;
+            }
+
+            .bottomcontent {
+                background: teal;
+                height: 900px;
+            }
+
+            body {
+                overflow: hidden;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="top">
+                <div class="topcontent"></div>
+            </div>
+            <div class="bottom">
+                <div class="inter">
+                    <div class="bottomHeader"></div>
+                    <div class="bottomFooter">
+                        <div>
+                            <!-- <div class="bottomcontent"></div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="bottom">
+                    <div class="bottomHeader"></div>
+                    <div class="bottomFooter">
+                        <div>
+                            <div class="bottomcontent"></div>
+                        </div>
+                    </div>
+            </div> -->
+        </div>
+    </body>
+
+</html>

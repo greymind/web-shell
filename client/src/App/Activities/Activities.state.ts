@@ -14,11 +14,11 @@ export interface TurnInfo {
     timeStamp: Date;
 }
 
-export interface ActivityState {
+export default interface ActivitiesState {
     activities: ActivityInfo[];
 }
 
-export const defaultState: ActivityState = {
+export const defaultState: ActivitiesState = {
     activities: [
         {
             id: '0', name: 'Coffee', groupId: '0',
