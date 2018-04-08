@@ -1,5 +1,5 @@
-import { HelloState } from '../Hello/Hello.state';
+import { PeopleState } from '../App/People/People.state';
 
 export interface StoreState {
-    hello: HelloState;
+    people: PeopleState;
 }

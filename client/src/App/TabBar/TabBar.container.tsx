@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { TabBar, TabInfo } from './TabBar';
 import { SemanticWIDTHS } from 'semantic-ui-react';
+import { withRouter, RouteComponentProps } from 'react-router';
 
-export interface Props {
+export interface Props extends RouteComponentProps<null> {
     tabs: TabInfo[];
     widths: SemanticWIDTHS;
 }
@@ -17,8 +18,12 @@ export class TabBarContainer extends React.Component<Props, State> {
 
         const firstTab = props.tabs[0];
 
+        const locationTab = props.tabs.find(tabInfo => {
+            return tabInfo.to === props.location.pathname;
+        }) || firstTab;
+
         this.state = {
-            currentTab: firstTab.name
+            currentTab: locationTab.name
         };
     }
 
@@ -38,3 +43,5 @@ export class TabBarContainer extends React.Component<Props, State> {
         );
     }
 }
+
+export default withRouter(TabBarContainer);

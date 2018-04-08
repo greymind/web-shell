@@ -2,10 +2,10 @@ import { combineReducers, AnyAction } from 'redux';
 import reduceReducers from 'reduce-reducers';
 import { StoreState } from './state';
 
-import { helloSliceReducer } from '../Hello/Hello.reducers';
+import { reducer as people } from '../App/People/People.reducer';
 
 const combinedReducers = combineReducers<StoreState>({
-    'hello': helloSliceReducer
+    people
 });
 
 const globalReducer = (state: StoreState, action: AnyAction) => {

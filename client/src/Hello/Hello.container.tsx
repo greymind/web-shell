@@ -7,10 +7,10 @@ import Hello, { Props } from './Hello';
 import { incrementEnthusiasm } from './actions/incrementEnthusiasm.action';
 import { decrementEnthusiasm } from './actions/decrementEnthusiasm.action';
 
-function mapStateToProps({ hello }: StoreState): Partial<Props> {
+function mapStateToProps({ people }: StoreState): Partial<Props> {
     return {
-        name: hello.languageName,
-        level: hello.enthusiasmLevel
+        name: 'Lang',
+        level: 1
     };
 }
 
