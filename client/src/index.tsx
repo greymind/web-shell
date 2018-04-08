@@ -19,7 +19,7 @@ import reduxFreeze from 'redux-freeze';
 import { StoreState } from './store/state';
 import { rootReducer } from './store/reducer';
 
-import './index.css';
+import 'semantic-ui-css/semantic.css';
 
 LogRocket.init('jqnfct/web-shell-dev');
 

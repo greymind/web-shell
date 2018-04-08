@@ -1,0 +1,58 @@
+{
+    "Functional component": {
+        "prefix": "g_functional_component",
+        "body": [
+            "import * as React from 'react';",
+            "",
+            "export interface Props {",
+            "}",
+            "",
+            "export const ${TM_FILENAME/(.*)\\..+$/$1/} = (props: Props) => (",
+            "    <div />$0",
+            ");"
+        ],
+        "description": "Functional component"
+    },
+    "Functional container component": {
+        "prefix": "g_functional_container_component",
+        "body": [
+            "import * as React from 'react';",
+            "",
+            "import { ${TM_FILENAME/(.*)\\.container\\..+$/$1/}, Props as ${TM_FILENAME/(.*)\\.container\\..+$/$1/}Props } from './${TM_FILENAME/(.*)\\.container\\..+$/$1/}';",
+            "",
+            "export interface Props extends ${TM_FILENAME/(.*)\\.container\\..+$/$1/}Props {",
+            "}",
+            "",
+            "export const ${TM_FILENAME/(.*)\\.container\\..+$/$1/}Container = (props: Props) => (",
+            "    <${TM_FILENAME/(.*)\\.container\\..+$/$1/} {...props}$0 />",
+            ");"
+        ],
+        "description": "Functional container component"
+    },
+    "Class container component": {
+        "prefix": "g_class_container_component",
+        "body": [
+            "import * as React from 'react';",
+            "import { ${TM_FILENAME/(.*)\\.container\\..+$/$1/}, Props as ${TM_FILENAME/(.*)\\.container\\..+$/$1/}Props } from './${TM_FILENAME/(.*)\\.container\\..+$/$1/}';",
+            "",
+            "export interface Props extends ${TM_FILENAME/(.*)\\.container\\..+$/$1/}Props { }",
+            "",
+            "export interface State { }",
+            "",
+            "export class ${TM_FILENAME/(.*)\\.container\\..+$/$1/}Container extends React.Component<Props, State> {",
+            "    constructor(props: Props) {",
+            "        super(props);",
+            "",
+            "        this.state = {};",
+            "    }",
+            "",
+            "    render() {",
+            "        return (",
+            "            <${TM_FILENAME/(.*)\\.container\\..+$/$1/} {...this.props}$0 />",
+            "        );",
+            "    }",
+            "}"
+        ],
+        "description": "Class container component"
+    }
+}
