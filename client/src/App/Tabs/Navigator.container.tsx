@@ -23,6 +23,14 @@ export class Navigator extends React.Component<Props> {
         return Math.max(locationTab, firstTab);
     }
 
+    componentDidMount() {
+        const newTab = this.getCurrentTabBasedOnLocation(this.props);
+
+        if (this.props.currentTab !== newTab) {
+            this.props.changeTab!(newTab);
+        }
+    }
+
     componentWillReceiveProps(nextProps: Props) {
         const getPathname = (props: Props) => props.location.pathname;
 
