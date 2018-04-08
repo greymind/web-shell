@@ -8,6 +8,7 @@ export interface PersonInfo {
 
 export interface Props {
     people: PersonInfo[];
+    label: string;
 }
 
 export const People = (props: Props) => (
