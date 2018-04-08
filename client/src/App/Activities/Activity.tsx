@@ -8,7 +8,7 @@ export interface Props extends ActivityInfo {
 
 export const Activity = (props: Props) => (
     <List.Item className="Group-list-item">
-        <List.Icon circular={true} name="group" />
+        <List.Icon circular={true} name="shopping bag" />
         <List.Content>
             <List.Header>{props.name}</List.Header>
             <List.Description>{props.groupName}</List.Description>
