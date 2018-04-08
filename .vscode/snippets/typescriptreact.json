@@ -8,7 +8,7 @@
             "}",
             "",
             "export const ${TM_FILENAME/(.*)\\..+$/$1/} = (props: Props) => (",
-            "    <div />$0",
+            "    <div>${TM_FILENAME/(.*)\\..+$/$1/}$0</div>",
             ");"
         ],
         "description": "Functional component"
