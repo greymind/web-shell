@@ -16,6 +16,7 @@ import Tabs, { TabInfo } from './Tabs/Tabs.container';
 
 const styles: StyleRulesCallback<'app'> = theme => ({
   app: {
+    height: '100%',
   },
 });
 

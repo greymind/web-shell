@@ -1,4 +1,5 @@
 import App from './App/App.container';
+import './index.css';
 
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
@@ -52,7 +53,7 @@ if (module.hot) {
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <div>
+      <div className="Index-root">
         <App />
         <DevTools />
       </div>

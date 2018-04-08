@@ -63,29 +63,29 @@ export class TabBarContainer extends React.Component<Props, State> {
     }
 
     render() {
+        const style = {
+            // height: '100%'
+        };
+
         return (
-            <div>
+            <div style={style}>
                 <Tabs value={this.state.currentTab} onChange={this.onTabChange} fullWidth={true}>
                     {this.props.tabs.map(tabInfo => (
                         <Tab key={tabInfo.label} label={tabInfo.label} />
                     ))}
                 </Tabs>
-                <div>
+                <div style={style}>
                     <SwipeableViews
                         axis="x"
                         index={this.state.currentTab}
                         onChangeIndex={this.onTabChangeIndex}
+                        resistance={true}
+                        style={style}
                     >
                         {this.props.tabs.map(tabInfo => (
-                            // <Route
-                            //     key={tabInfo.label}
-                            //     path={tabInfo.to}
-                            //     render={() =>
-                            <DocumentTitle title={`${tabInfo.label} | Greymind Turns`}>
+                            <DocumentTitle key={tabInfo.label} title={`${tabInfo.label} | Greymind Turns`}>
                                 <tabInfo.component />
                             </DocumentTitle>
-                            // }
-                            // />
                         ))}
                     </SwipeableViews>
                 </div>
