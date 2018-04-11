@@ -62,46 +62,11 @@ if (module.hot) {
   });
 }
 
-// tslint:disable-next-line:no-console
-// history.listen((location) => console.log(location));
-
-const onClick = (event: React.MouseEvent<HTMLDivElement>) => {
-  event.persist();
-  // tslint:disable-next-line:no-console
-  console.log('click', event.target, event.currentTarget, event);
-};
-
-const onChange = (event: React.FormEvent<HTMLDivElement>) => {
-  event.persist();
-  // tslint:disable-next-line:no-console
-  console.log('change', event.target, event.currentTarget, event);
-};
-
-const onInputChange = (event: React.ChangeEvent<HTMLDivElement>) => {
-  event.persist();
-  // tslint:disable-next-line:no-console
-  console.log('input-change', event.target, event.currentTarget, event);
-};
-
-const onScroll = (event: React.UIEvent<HTMLDivElement>) => {
-  event.persist();
-  // tslint:disable-next-line:no-console
-  console.log('scroll', event.target, event);
-};
-
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <div className="height100">
-        <div
-          className="Index-root"
-          onClickCapture={onClick}
-          onScrollCapture={onScroll}
-          onChangeCapture={onChange}
-          onInputCapture={onInputChange}
-        >
-          <App />
-        </div>
+      <div className="Index-root">
+        <App />
         {isDevMode()
           ? <DevTools />
           : <div />
