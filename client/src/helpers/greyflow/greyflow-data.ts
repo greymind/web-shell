@@ -5,21 +5,27 @@ import * as _ from 'lodash';
 export type GreyFlowEventName = 'click';
 export type GreyFlowEvent = MouseEvent;
 
-export interface GreyFlowEventData {
+export interface GreyFlowItemBase {
+    timeStamp: number;
+    domTimeStamp: number;
+}
+
+export interface GreyFlowEventItem extends GreyFlowItemBase {
+    type: 'event';
     name: GreyFlowEventName;
     event: GreyFlowEvent;
     target: HTMLElement;
     handlerTarget: HTMLElement | null;
+    linkedByAction: boolean;
+    autClassName: string | null;
 }
 
-export type GreyFlowDataType = GreyFlowEventData | AnyAction;
-
-export interface GreyFlowItem {
-    timeStamp: number;
-    domTimeStamp: number;
-    data: GreyFlowDataType;
-    type: 'event' | 'action' | 'start';
+export interface GreyFlowActionItem extends GreyFlowItemBase {
+    type: 'action';
+    action: AnyAction;
 }
+
+export type GreyFlowItem = GreyFlowEventItem | GreyFlowActionItem;
 
 export class GreyStore {
     data: GreyFlowItem[];
@@ -28,31 +34,57 @@ export class GreyStore {
         this.data = [];
     }
 
-    addEvent = (eventData: GreyFlowEventData) => {
-        if (eventData.handlerTarget !== null
-            && !_.some(eventData.handlerTarget.classList, className => className.startsWith('aut-'))) {
-            console.warn('Handler element must have an aut-* class!', eventData.handlerTarget);
-        }
-
-        this.addItem({
+    addEvent = (
+        name: GreyFlowEventName,
+        event: GreyFlowEvent,
+        target: HTMLElement,
+        handlerTarget: HTMLElement | null
+    ) => {
+        const item: GreyFlowEventItem = {
             type: 'event',
             timeStamp: new Date().getTime(),
-            domTimeStamp: eventData.event.timeStamp,
-            data: eventData,
-        });
+            domTimeStamp: event.timeStamp,
+            name,
+            event,
+            target,
+            handlerTarget,
+            linkedByAction: false,
+            autClassName: ''
+        };
+
+        this.addItem(item);
     }
 
-    addAction = (actionData: AnyAction) => {
-        this.addItem({
+    addAction = (action: AnyAction) => {
+        const item: GreyFlowActionItem = {
             type: 'action',
             timeStamp: new Date().getTime(),
             domTimeStamp: performance.now(),
-            data: actionData
-        });
+            action
+        };
+
+        this.addItem(item);
     }
 
-    getLastEvent = (): GreyFlowItem | undefined => {
-        return _.findLast(this.data, item => item.type === 'event');
+    getData = () => {
+        return this.data;
+    }
+
+    getAllLinkedEvents = (): GreyFlowEventItem[] => {
+        return _.filter(this.data, this.isLinkedEventItem);
+    }
+
+    getLastEvent = (): GreyFlowEventItem | undefined => {
+        return _.findLast(this.data, this.isEventItem);
+    }
+
+    private isEventItem(item: GreyFlowItem): item is GreyFlowEventItem {
+        return (<GreyFlowEventItem>item).type === 'event';
+    }
+
+    private isLinkedEventItem(item: GreyFlowItem): item is GreyFlowEventItem {
+        const eventItem = <GreyFlowEventItem>item;
+        return eventItem.type === 'event' && eventItem.linkedByAction;
     }
 
     private addItem = (item: GreyFlowItem) => {

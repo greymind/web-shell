@@ -30,12 +30,7 @@ export default () => {
                     level++;
                 }
 
-                data.addEvent({
-                    name: name,
-                    event: event,
-                    target: event.target as HTMLElement,
-                    handlerTarget
-                });
+                data.addEvent(name,  event, event.target as HTMLElement, handlerTarget);
             }
 
             callback(event);
