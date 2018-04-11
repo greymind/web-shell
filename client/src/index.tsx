@@ -21,7 +21,9 @@ import { rootReducer } from './store/reducer';
 
 import 'typeface-roboto';
 import { isDevMode } from './helpers/utilities';
+import greyflow from './helpers/greyflow/greyflow';
 
+greyflow.initialize();
 // LogRocket.init('jqnfct/web-shell-dev');
 
 const navigationMiddleware = routerMiddleware(history);
@@ -34,7 +36,10 @@ const middleware = [
 const devMiddleware = [];
 if (isDevMode()) {
   const reduxFreeze = require('redux-freeze');
-  devMiddleware.push(reduxFreeze);
+  devMiddleware.push(
+    reduxFreeze,
+    greyflow.getMiddleware(),
+  );
 }
 
 const enhancers = [];

@@ -22,7 +22,7 @@ export default (props: Props) => {
     return (
         <Tabs value={props.currentTab} onChange={onTabChange} fullWidth={true}>
             {props.tabs.map(tabInfo => (
-                <Tab key={tabInfo.label} label={tabInfo.label} />
+                <Tab key={tabInfo.label} label={tabInfo.label} className={`aut-${tabInfo.label}`} />
             ))}
         </Tabs>
     );
