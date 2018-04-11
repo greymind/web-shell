@@ -31,11 +31,7 @@ const styles: StyleRulesCallback<'app'> = theme => ({
     overflowY: 'auto',
     flexGrow: '1',
     flexBasis: 'calc(100% - 10px)'
-  },
-  long: {
-    height: '900px',
-    backgroundColor: 'teal'
-  } as React.CSSProperties
+  }
 });
 
 type WithStylesKeys = 'app' | 'appbar' | 'content' | 'long';
@@ -71,7 +67,7 @@ const App = (props: WithStyles<WithStylesKeys>) => {
       <div className={classes.content}>
         <TabContent tabs={tabs} />
       </div>
-    </Paper >
+    </Paper>
   );
 };
 
