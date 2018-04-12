@@ -61,7 +61,10 @@ export class GreyStore {
             autClassName: ''
         };
 
+        this.checkAndSetAutClass(item);
         this.addItem(item);
+
+        return item;
     }
 
     addAction = (action: AnyAction) => {
@@ -73,6 +76,8 @@ export class GreyStore {
         };
 
         this.addItem(item);
+
+        return item;
     }
 
     getData = () => {
@@ -85,6 +90,24 @@ export class GreyStore {
 
     getLastEvent = (): GreyFlowEventItem | undefined => {
         return _.findLast(this.data, this.isEventItem);
+    }
+
+    private checkAndSetAutClass = (eventItem: GreyFlowEventItem) => {
+        if (eventItem.handlerTarget === null
+            || eventItem.linkedByAction) {
+            return;
+        }
+
+        const { handlerTarget } = eventItem;
+
+        const autClassName = _.find(handlerTarget.classList, className => className.startsWith('aut-'));
+
+        if (autClassName === undefined) {
+            console.warn('Handler element must have an aut-* class!', handlerTarget);
+        } else {
+            eventItem.linkedByAction = true;
+            eventItem.autClassName = autClassName;
+        }
     }
 
     private isEventItem(item: GreyFlowItem): item is GreyFlowEventItem {

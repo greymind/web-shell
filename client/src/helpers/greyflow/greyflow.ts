@@ -1,28 +1,8 @@
 // tslint:disable:no-any no-console no-string-literal
 import { Store, Dispatch, AnyAction } from 'redux';
 import overrideEvents from './greyflow-events';
-import data, { GreyFlowEventItem } from './greyflow-data';
+import data from './greyflow-data';
 import * as _ from 'lodash';
-
-const ensureLastEventHasAutClass = (lastEvent: GreyFlowEventItem | undefined, action: AnyAction) => {
-    if (lastEvent === undefined
-        || lastEvent.handlerTarget === null
-        || lastEvent.linkedByAction) {
-        return;
-    }
-
-    const { handlerTarget } = lastEvent;
-
-    const autClassName = _.find(handlerTarget.classList, className => className.startsWith('aut-'));
-
-    if (autClassName === undefined) {
-        console.warn('Handler element must have an aut-* class!', handlerTarget,
-            'Based on action', action.type, action);
-    } else {
-        lastEvent.linkedByAction = true;
-        lastEvent.autClassName = autClassName;
-    }
-};
 
 const replayLinkedEvents = () => {
     let linkedEvents = data.getAllLinkedEvents().slice();
@@ -58,8 +38,8 @@ const replayLinkedEvents = () => {
 (window as any).replay = replayLinkedEvents;
 
 const middleware = <S>(store: Store<S>) => (next: Dispatch<S>) => (action: AnyAction) => {
-    const lastEvent = data.getLastEvent();
-    ensureLastEventHasAutClass(lastEvent, action);
+    // const lastEvent = data.getLastEvent();
+    // ensureLastEventHasAutClass(lastEvent, action);
 
     data.addAction(action);
 
