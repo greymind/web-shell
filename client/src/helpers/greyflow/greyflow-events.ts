@@ -35,17 +35,7 @@ export default () => {
                 element = element.parentElement;
             }
 
-            if (element === null) {
-                callback(event);
-                return;
-            }
-
-            // while (handlerTarget !== null
-            //     && handlerTarget[handlerKey] === null) {
-            //     handlerTarget = handlerTarget.parentElement;
-            // }
-
-            if (handlerTarget !== null) {
+            if (element !== null && handlerTarget !== null) {
                 data.addEvent(name, event, event.target as HTMLElement, handlerTarget);
             }
 
