@@ -53,7 +53,6 @@ const middleware = <S>(store: Store<S>) => (next: Dispatch<S>) => (action: AnyAc
 
 const initialize = () => {
     overrideEvents();
-    console.log(data);
 };
 
 export default {

@@ -23,7 +23,10 @@ import 'typeface-roboto';
 import { isDevMode } from './helpers/utilities';
 import greyflow from './helpers/greyflow/greyflow';
 
-greyflow.initialize();
+if (isDevMode()) {
+  greyflow.initialize();
+}
+
 // LogRocket.init('jqnfct/web-shell-dev');
 
 const navigationMiddleware = routerMiddleware(history);
