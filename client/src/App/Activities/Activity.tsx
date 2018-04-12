@@ -7,10 +7,11 @@ import GroupWorkIcon from '@material-ui/icons/GroupWork';
 export interface Props extends ActivityInfo {
     groupName: string;
     lastTurnAt: number;
+    openActivity?: () => void;
 }
 
 export default (props: Props) => (
-    <ListItem button={true}>
+    <ListItem button={true} onClick={props.openActivity}>
         <ListItemIcon>
             <GroupWorkIcon />
         </ListItemIcon>

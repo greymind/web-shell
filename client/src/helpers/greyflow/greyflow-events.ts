@@ -20,14 +20,18 @@ export default () => {
 
         const newCallback = (event: GreyFlowEvent) => {
             // console.log('firing event', name, evt);
-            const appRoot = 'App-root';
+            const devToolsRoot = 'DevTools-root';
             const handlerKey = `on${name}`;
 
             let element: HTMLElement | null = event.target as HTMLElement;
             let handlerTarget: HTMLElement | null = null;
 
-            while (element !== null
-                && !element.classList.contains(appRoot)) {
+            while (element !== null) {
+                if (element.classList.contains(devToolsRoot)) {
+                    handlerTarget = element = null;
+                    break;
+                }
+
                 if (handlerTarget === null && element[handlerKey] !== null) {
                     handlerTarget = element;
                 }
@@ -35,7 +39,7 @@ export default () => {
                 element = element.parentElement;
             }
 
-            if (element !== null && handlerTarget !== null) {
+            if (handlerTarget !== null) {
                 data.addEvent(name, event, event.target as HTMLElement, handlerTarget);
             }
 

@@ -76,7 +76,7 @@ ReactDOM.render(
       <div className="Index-root">
         <App />
         {isDevMode()
-          ? <DevTools />
+          ? <div className="DevTools-root"><DevTools /></ div>
           : <div />
         }
       </div>

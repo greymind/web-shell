@@ -30,11 +30,17 @@ export const defaultState: ActivitiesState = {
                 { id: cuid(), activityId: '0', personId: '3', timeStamp: new Date(2017, 7, 19) },
                 { id: cuid(), activityId: '0', personId: '3', timeStamp: new Date(2017, 7, 27) },
                 { id: cuid(), activityId: '0', personId: '3', timeStamp: new Date(2017, 8, 30) },
+                { id: cuid(), activityId: '0', personId: '1', timeStamp: new Date(2017, 12, 1) },
+                { id: cuid(), activityId: '0', personId: '3', timeStamp: new Date(2018, 4, 9) },
             ]
         },
         {
             id: '1', name: 'Cake', groupId: '0',
             turns: [
+                { id: cuid(), activityId: '1', personId: '3', timeStamp: new Date(2017, 9, 8) },
+                { id: cuid(), activityId: '1', personId: '0', timeStamp: new Date(2017, 9, 15) },
+                { id: cuid(), activityId: '1', personId: '0', timeStamp: new Date(2017, 9, 29) },
+                { id: cuid(), activityId: '1', personId: '1', timeStamp: new Date(2018, 4, 6) },
 
             ]
         },
