@@ -52,7 +52,7 @@ const App = (props: WithStyles<WithStylesKeys>) => {
   // };
 
   return (
-    <Paper className={classes.app}>
+    <Paper className={`${classes.app} App-root`}>
       <div className={classes.appbar}>
         <AppBar position="static" color="default">
           <Toolbar>

@@ -2,7 +2,16 @@
 import { AnyAction } from 'redux';
 import * as _ from 'lodash';
 
-export type GreyFlowEventName = 'click';
+export const enum GreyFlowItemType {
+    Event = 'event',
+    Action = 'action'
+}
+
+export enum GreyFlowEventName {
+    Click = 'click',
+    KeyPress = 'keypress',
+}
+
 export type GreyFlowEvent = MouseEvent;
 
 export interface GreyFlowItemBase {
@@ -11,7 +20,7 @@ export interface GreyFlowItemBase {
 }
 
 export interface GreyFlowEventItem extends GreyFlowItemBase {
-    type: 'event';
+    type: GreyFlowItemType.Event;
     name: GreyFlowEventName;
     event: GreyFlowEvent;
     target: HTMLElement;
@@ -21,7 +30,7 @@ export interface GreyFlowEventItem extends GreyFlowItemBase {
 }
 
 export interface GreyFlowActionItem extends GreyFlowItemBase {
-    type: 'action';
+    type: GreyFlowItemType.Action;
     action: AnyAction;
 }
 
@@ -41,7 +50,7 @@ export class GreyStore {
         handlerTarget: HTMLElement | null
     ) => {
         const item: GreyFlowEventItem = {
-            type: 'event',
+            type: GreyFlowItemType.Event,
             timeStamp: new Date().getTime(),
             domTimeStamp: event.timeStamp,
             name,
@@ -57,7 +66,7 @@ export class GreyStore {
 
     addAction = (action: AnyAction) => {
         const item: GreyFlowActionItem = {
-            type: 'action',
+            type: GreyFlowItemType.Action,
             timeStamp: new Date().getTime(),
             domTimeStamp: performance.now(),
             action
