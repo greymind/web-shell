@@ -41,6 +41,7 @@ export const defaultState: ActivitiesState = {
                 { id: cuid(), activityId: '1', personId: '0', timeStamp: new Date(2017, 9, 15) },
                 { id: cuid(), activityId: '1', personId: '0', timeStamp: new Date(2017, 9, 29) },
                 { id: cuid(), activityId: '1', personId: '1', timeStamp: new Date(2018, 4, 6) },
+                { id: cuid(), activityId: '1', personId: '0', timeStamp: new Date(2018, 4, 13) },
 
             ]
         },
