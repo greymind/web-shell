@@ -6,15 +6,25 @@ const baseAddListener = document.addEventListener;
 const baseRemoveListener = document.removeEventListener;
 const listeners = {};
 
-// const ignoreEventNames = ['mouseover', 'mousemove', 'message', 'keyup', 'keydown',
-//     'error', 'mouseout', 'blur', 'focus', 'scroll', 'mousedown', 'mouseup'];
+const ignoreEventNames = ['mouseover', 'mousemove', 'message', 'keyup', 'keydown',
+    'error', 'mouseout', 'blur', 'focus', 'scroll', 'mousedown', 'mouseup'];
 
 const includeEventNames = _.values(GreyFlowEventName);
 
 export default () => {
     document.addEventListener = (name: any, callback: any, options: any) => {
         if (!_.some(includeEventNames, n => n === name)) {
-            baseAddListener(name, callback, options);
+            const dummyCallback = (event: any) => {
+                if (!_.some(ignoreEventNames, n => n === name)) {
+                    console.log('Firing unhandled event:', name);
+                    // console.log('Firing unhandled event', name, event);
+                }
+
+                callback(event);
+            };
+
+            listeners[name] = dummyCallback;
+            baseAddListener(name, dummyCallback, options);
             return;
         }
 
@@ -24,7 +34,9 @@ export default () => {
                 return;
             }
 
-            // console.log('firing event', name, evt);
+            // console.log('Firing event:', name);
+            console.log('Firing event', name, event);
+
             const devToolsRoot = 'DevTools-root';
             const handlerKey = `on${name}`;
 
@@ -65,4 +77,6 @@ export default () => {
         baseRemoveListener(name, newCallback, options);
         delete listeners[callback];
     };
+
+    document.addEventListener('contextmenu', _.noop);
 };

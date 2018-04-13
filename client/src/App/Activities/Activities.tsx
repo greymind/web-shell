@@ -6,6 +6,7 @@ import {
     Divider, ListItem, ListItemText, Button, Slide, withStyles, WithStyles
 } from 'material-ui';
 import CloseIcon from '@material-ui/icons/Close';
+import aut from '../../helpers/greyflow/greyflow-aut';
 
 type WithStylesKeys = 'appBar' | 'flex';
 
@@ -72,7 +73,7 @@ class Activities extends React.Component<Props, State> {
                     <AppBar className={classes.appBar}>
                         <Toolbar>
                             <IconButton
-                                className={`aut-${'closer'}`}
+                                className={aut('closer')}
                                 color="inherit"
                                 onClick={this.handleClose}
                                 aria-label="Close"

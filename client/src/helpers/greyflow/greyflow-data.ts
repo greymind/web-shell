@@ -11,6 +11,7 @@ export const enum GreyFlowItemType {
 
 export enum GreyFlowEventName {
     Click = 'click',
+    ContextMenu = 'contextmenu',
     KeyPress = 'keypress',
 }
 
@@ -27,7 +28,7 @@ export interface GreyFlowEventItem extends GreyFlowItemBase {
     event: GreyFlowEvent;
     target: HTMLElement;
     handlerTarget: HTMLElement | null;
-    linkedByAction: boolean;
+    linked: boolean;
     autClassName: string | null;
 }
 
@@ -102,7 +103,7 @@ export class GreyStore {
             event,
             target,
             handlerTarget,
-            linkedByAction: false,
+            linked: false,
             autClassName: ''
         };
 
@@ -139,7 +140,7 @@ export class GreyStore {
 
     private checkAndSetAutClass = (eventItem: GreyFlowEventItem) => {
         if (eventItem.handlerTarget === null
-            || eventItem.linkedByAction) {
+            || eventItem.linked) {
             return;
         }
 
@@ -150,7 +151,7 @@ export class GreyStore {
         if (autClassName === undefined) {
             console.warn('Handler element must have an aut-* class!', handlerTarget);
         } else {
-            eventItem.linkedByAction = true;
+            eventItem.linked = true;
             eventItem.autClassName = autClassName;
         }
     }
@@ -161,7 +162,7 @@ export class GreyStore {
 
     private isLinkedEventItem(item: GreyFlowItem): item is GreyFlowEventItem {
         const eventItem = <GreyFlowEventItem>item;
-        return eventItem.type === 'event' && eventItem.linkedByAction;
+        return eventItem.type === 'event' && eventItem.linked;
     }
 
     private addItem = (item: GreyFlowItem) => {

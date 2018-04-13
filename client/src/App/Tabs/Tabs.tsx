@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Tabs, { Tab } from 'material-ui/Tabs';
+import aut from '../../helpers/greyflow/greyflow-aut';
 
 export interface TabInfo {
     label: string;
@@ -22,7 +23,7 @@ export default (props: Props) => {
     return (
         <Tabs value={props.currentTab} onChange={onTabChange} fullWidth={true}>
             {props.tabs.map(tabInfo => (
-                <Tab key={tabInfo.label} label={tabInfo.label} className={`aut-${tabInfo.label}`} />
+                <Tab key={tabInfo.label} label={tabInfo.label} className={aut('tab', tabInfo.label)} />
             ))}
         </Tabs>
     );
