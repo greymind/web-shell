@@ -94,8 +94,6 @@ const middleware = <S>(store: Store<S>) => (next: Dispatch<S>) => (action: AnyAc
         initialState = store.getState();
     }
 
-    console.log(store.getState());
-
     data.addAction(action);
 
     // console.log('dispatching', action);
