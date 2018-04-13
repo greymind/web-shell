@@ -42,7 +42,7 @@ class Activities extends React.Component<Props, State> {
     handleClickOpen = () => {
         setTimeout(() => {
             this.setState({ open: true });
-        }, 1000);
+        }, 800);
     }
 
     handleClose = () => {
@@ -66,7 +66,12 @@ class Activities extends React.Component<Props, State> {
                 >
                     <AppBar className={classes.appBar}>
                         <Toolbar>
-                            <IconButton color="inherit" onClick={this.handleClose} aria-label="Close">
+                            <IconButton
+                                className={`aut-${'closer'}`}
+                                color="inherit"
+                                onClick={this.handleClose}
+                                aria-label="Close"
+                            >
                                 <CloseIcon />
                             </IconButton>
                             <Typography variant="title" color="inherit" className={classes.flex}>

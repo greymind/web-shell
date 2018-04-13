@@ -11,7 +11,7 @@ export interface Props extends ActivityInfo {
 }
 
 export default (props: Props) => (
-    <ListItem button={true} onClick={props.openActivity}>
+    <ListItem className={`aut-${props.name}`} button={true} onClick={props.openActivity}>
         <ListItemIcon>
             <GroupWorkIcon />
         </ListItemIcon>
