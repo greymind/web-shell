@@ -61,8 +61,8 @@ const App = (props: WithStyles<WithStylesKeys>) => {
             </Typography>
           </Toolbar>
         </AppBar>
-        <Tabs tabs={tabs} />
         <Navigator tabs={tabs} />
+        <Tabs tabs={tabs} />
       </div>
       <div className={classes.content}>
         <TabContent tabs={tabs} />

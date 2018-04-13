@@ -3,8 +3,16 @@ import { Store, Dispatch, AnyAction } from 'redux';
 import overrideEvents from './greyflow-events';
 import data, { GreyFlowEventItem } from './greyflow-data';
 import * as _ from 'lodash';
+import { setState } from './greyflow-reducer';
+
+let initialState: any = null;
+let storeRef: Store<any> | null = null;
+
+export const x: GreyFlowEventItem | string = _.uniqueId();
 
 const replayLinkedEvents = () => {
+    storeRef!.dispatch(setState(initialState));
+
     const timeDelay = 500;
     const seekDelay = 50;
     const retryTime = 5000;
@@ -77,6 +85,16 @@ const replayLinkedEvents = () => {
 const middleware = <S>(store: Store<S>) => (next: Dispatch<S>) => (action: AnyAction) => {
     // const lastEvent = data.getLastEvent();
     // ensureLastEventHasAutClass(lastEvent, action);
+
+    if (storeRef === null) {
+        storeRef = store;
+    }
+
+    if (initialState === null) {
+        initialState = store.getState();
+    }
+
+    console.log(store.getState());
 
     data.addAction(action);
 

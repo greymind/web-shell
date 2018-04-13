@@ -17,6 +17,12 @@ export const changeTabAndLocation = (newTab: number, location: string) => {
     };
 };
 
+export const changeLocation = (location: string) => {
+    return (dispatch: Dispatch<StoreState>) => {
+        dispatch(push(location));
+    };
+};
+
 export const changeTabMock = changeTab(0);
 
 export const changeTabReducer =

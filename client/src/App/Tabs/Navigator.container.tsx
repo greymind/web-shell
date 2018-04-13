@@ -4,12 +4,13 @@ import { connect } from 'react-redux';
 import { StoreState } from '../../store/state';
 import { TabInfo } from './TabInfo';
 import { withRouter, RouteComponentProps } from 'react-router';
-import { changeTab } from './actions/Tabs.changeTab';
+import { changeTab, changeLocation } from './actions/Tabs.changeTab';
 
 export interface Props extends RouteComponentProps<null> {
     tabs: TabInfo[];
     currentTab?: number;
     changeTab?: (index: number) => void;
+    changeLocation?: (location: string) => void;
 }
 
 export class Navigator extends React.Component<Props> {
@@ -33,13 +34,14 @@ export class Navigator extends React.Component<Props> {
 
     componentWillReceiveProps(nextProps: Props) {
         const getPathname = (props: Props) => props.location.pathname;
+        const newTab = this.getCurrentTabBasedOnLocation(nextProps);
 
         if (getPathname(nextProps) !== getPathname(this.props)) {
-            const newTab = this.getCurrentTabBasedOnLocation(nextProps);
-
             if (nextProps.currentTab !== newTab) {
                 this.props.changeTab!(newTab);
             }
+        } else if (nextProps.currentTab !== newTab) {
+            this.props.changeLocation!(this.props.tabs[nextProps.currentTab!].to);
         }
     }
 
@@ -59,6 +61,9 @@ function mapDispatchToProps(dispatch: Dispatch<StoreState>, ownProps: Props): Pa
     return {
         changeTab: (index: number) => {
             dispatch(changeTab(index));
+        },
+        changeLocation: (location: string) => {
+            dispatch(changeLocation(location));
         }
     };
 }
