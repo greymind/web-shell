@@ -9,8 +9,14 @@ import CloseIcon from '@material-ui/icons/Close';
 
 type WithStylesKeys = 'appBar' | 'flex';
 
-export interface Props extends WithStyles<WithStylesKeys> {
+export interface OnlyProps {
     activities: ActivityProps[];
+}
+
+export interface OnlyDispatch {
+}
+
+export interface Props extends OnlyProps, OnlyDispatch, WithStyles<WithStylesKeys> {
 }
 
 interface State {
@@ -40,9 +46,8 @@ class Activities extends React.Component<Props, State> {
     }
 
     handleClickOpen = () => {
-        setTimeout(() => {
-            this.setState({ open: true });
-        }, 800);
+        this.setState({ open: true });
+
     }
 
     handleClose = () => {

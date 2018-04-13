@@ -2,11 +2,12 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 
 import { StoreState } from '../../store/state';
-import Activities, { Props } from './Activities';
+import Activities, { OnlyProps, OnlyDispatch } from './Activities';
 
 import { maxBy, orderBy } from 'lodash';
+import { changeLocation, goBack } from '../Tabs/actions/Tabs.changeTab';
 
-function mapStateToProps(state: StoreState, ownProps: Props): Partial<Props> {
+function mapStateToProps(state: StoreState, ownProps: OnlyProps): OnlyProps {
     const { activities: { activities }, groups: { groups } } = state;
 
     return {
@@ -24,8 +25,15 @@ function mapStateToProps(state: StoreState, ownProps: Props): Partial<Props> {
     };
 }
 
-function mapDispatchToProps(dispatch: Dispatch<StoreState>, ownProps: Props): Partial<Props> {
-    return {};
+function mapDispatchToProps(dispatch: Dispatch<StoreState>, ownProps: OnlyProps): OnlyDispatch {
+    return {
+        changeLocation: (location: string) => {
+            dispatch(changeLocation(location));
+        },
+        goBack: () => {
+            dispatch(goBack());
+        }
+    };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Activities);
