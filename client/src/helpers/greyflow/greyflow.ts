@@ -3,15 +3,10 @@ import { Store, Dispatch, AnyAction } from 'redux';
 import overrideEvents from './greyflow-events';
 import data, { GreyFlowEventItem } from './greyflow-data';
 import * as _ from 'lodash';
-import { setState } from './greyflow-reducer';
-
-let initialState: any = null;
-let storeRef: Store<any> | null = null;
-
-export const x: GreyFlowEventItem | string = _.uniqueId();
 
 const replayLinkedEvents = () => {
-    storeRef!.dispatch(setState(initialState));
+    data.beginReplay();
+    data.resetStore();
 
     const timeDelay = 500;
     const seekDelay = 50;
@@ -24,6 +19,7 @@ const replayLinkedEvents = () => {
         let nextLinkedEvent: GreyFlowEventItem;
 
         if (linkedEvents.length <= 0) {
+            data.endReplay();
             return;
         }
 
@@ -86,12 +82,18 @@ const middleware = <S>(store: Store<S>) => (next: Dispatch<S>) => (action: AnyAc
     // const lastEvent = data.getLastEvent();
     // ensureLastEventHasAutClass(lastEvent, action);
 
-    if (storeRef === null) {
-        storeRef = store;
+    if (data.isInReplayPlayback()) {
+        // I guess here we verify if the action stack compares
+        // which means we will have to add it to the data store, etc.
+        return next(action);
     }
 
-    if (initialState === null) {
-        initialState = store.getState();
+    if (data.getStore() === null) {
+        data.setStore(store);
+    }
+
+    if (data.getInitialState() === undefined) {
+        data.setInitialState(store.getState());
     }
 
     data.addAction(action);

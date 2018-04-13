@@ -19,6 +19,11 @@ export default () => {
         }
 
         const newCallback = (event: GreyFlowEvent) => {
+            if (data.isInReplayPlayback()) {
+                callback(event);
+                return;
+            }
+
             // console.log('firing event', name, evt);
             const devToolsRoot = 'DevTools-root';
             const handlerKey = `on${name}`;

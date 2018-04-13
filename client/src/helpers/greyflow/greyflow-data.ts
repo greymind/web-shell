@@ -1,6 +1,8 @@
 // tslint:disable:no-any no-console no-string-literal
 import { AnyAction } from 'redux';
 import * as _ from 'lodash';
+import { Store } from 'redux';
+import { setState } from './greyflow-reducer';
 
 export const enum GreyFlowItemType {
     Event = 'event',
@@ -38,9 +40,52 @@ export type GreyFlowItem = GreyFlowEventItem | GreyFlowActionItem;
 
 export class GreyStore {
     data: GreyFlowItem[];
+    store: Store<any> | null;
+    initialState: any;
+    inReplayPlayback: boolean;
 
     constructor() {
         this.data = [];
+        this.store = null;
+        this.initialState = undefined;
+        this.inReplayPlayback = false;
+    }
+
+    setStore = (store: Store<any>) => {
+        this.store = store;
+    }
+
+    getStore = () => {
+        return this.store;
+    }
+
+    resetStore = () => {
+        if (this.store === null) {
+            console.error('Store is null, please call setStore first!');
+            return;
+        }
+
+        this.store.dispatch(setState(this.initialState));
+    }
+
+    setInitialState = (initialState: any) => {
+        this.initialState = initialState;
+    }
+
+    getInitialState = () => {
+        return this.initialState;
+    }
+
+    beginReplay = () => {
+        this.inReplayPlayback = true;
+    }
+
+    endReplay = () => {
+        this.inReplayPlayback = false;
+    }
+
+    isInReplayPlayback = () => {
+        return this.inReplayPlayback;
     }
 
     addEvent = (
