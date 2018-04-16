@@ -16,6 +16,7 @@ import Tabs from './Tabs/Tabs.container';
 import { TabInfo } from './Tabs/TabInfo';
 import Navigator from './Tabs/Navigator.container';
 import TabContent from './Tabs/TabContent.container';
+import GreyFlowWrapper from '../helpers/GreyFlow/GreyFlowWrapper';
 
 const styles: StyleRulesCallback<'app'> = theme => ({
   app: {
@@ -52,22 +53,24 @@ const App = (props: WithStyles<WithStylesKeys>) => {
   // };
 
   return (
-    <Paper className={`${classes.app} App-root`}>
-      <div className={classes.appbar}>
-        <AppBar position="static" color="default">
-          <Toolbar>
-            <Typography variant="title" color="inherit">
-              Greymind Turns
+    <GreyFlowWrapper>
+      <Paper className={`${classes.app} App-root`}>
+        <div className={classes.appbar}>
+          <AppBar position="static" color="default">
+            <Toolbar>
+              <Typography variant="title" color="inherit">
+                Greymind Turns
             </Typography>
-          </Toolbar>
-        </AppBar>
-        <Navigator tabs={tabs} />
-        <Tabs tabs={tabs} />
-      </div>
-      <div className={classes.content}>
-        <TabContent tabs={tabs} />
-      </div>
-    </Paper>
+            </Toolbar>
+          </AppBar>
+          <Navigator tabs={tabs} />
+          <Tabs tabs={tabs} />
+        </div>
+        <div className={classes.content}>
+          <TabContent tabs={tabs} />
+        </div>
+      </Paper>
+    </GreyFlowWrapper>
   );
 };
 
