@@ -38,13 +38,15 @@ export default () => {
             console.log('Firing event', name, event);
 
             const devToolsRoot = 'DevTools-root';
+            const greyFlowRoot = 'GreyFlow-root';
             const handlerKey = `on${name}`;
 
             let element: HTMLElement | null = event.target as HTMLElement;
             let handlerTarget: HTMLElement | null = null;
 
             while (element !== null) {
-                if (element.classList.contains(devToolsRoot)) {
+                if (element.classList.contains(devToolsRoot)
+                    || element.classList.contains(greyFlowRoot)) {
                     handlerTarget = element = null;
                     break;
                 }

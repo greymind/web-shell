@@ -50,7 +50,7 @@ export class GreyFlowWrapper extends React.Component<Props, State> {
         };
 
         const classes = {
-            root: 'abc'
+            root: 'GreyFlow-root'
         };
 
         return (
