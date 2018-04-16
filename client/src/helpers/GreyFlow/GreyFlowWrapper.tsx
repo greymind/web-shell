@@ -19,9 +19,13 @@ export class GreyFlowWrapper extends React.Component<Props, State> {
     }
 
     onContextMenu = (event: PointerEvent) => {
-        this.setState({
-            open: true
-        });
+        if (event.ctrlKey) {
+            event.preventDefault();
+
+            this.setState({
+                open: true
+            });
+        }
     }
 
     handleClose = () => {
