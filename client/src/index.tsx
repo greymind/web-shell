@@ -21,7 +21,7 @@ import { rootReducer } from './store/reducer';
 
 import 'typeface-roboto';
 import { isDevMode } from './helpers/utilities';
-import greyflow from './helpers/greyflow/greyflow';
+import greyflow from './helpers/GreyFlow/greyflow';
 
 if (isDevMode()) {
   greyflow.initialize();

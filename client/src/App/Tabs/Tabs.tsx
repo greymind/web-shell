@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Tabs, { Tab } from 'material-ui/Tabs';
-import aut from '../../helpers/greyflow/greyflow-aut';
+import aut from '../../helpers/GreyFlow/greyflow-aut';
 
 export interface TabInfo {
     label: string;

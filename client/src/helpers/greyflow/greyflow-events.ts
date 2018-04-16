@@ -78,5 +78,10 @@ export default () => {
         delete listeners[callback];
     };
 
-    document.addEventListener('contextmenu', _.noop);
+    document.addEventListener('contextmenu', (event: PointerEvent) => {
+        if (event.ctrlKey) {
+            event.preventDefault();
+            data.showMenu(event);
+        }
+    });
 };

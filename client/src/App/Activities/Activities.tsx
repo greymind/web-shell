@@ -6,7 +6,7 @@ import {
     Divider, ListItem, ListItemText, Button, Slide, withStyles, WithStyles
 } from 'material-ui';
 import CloseIcon from '@material-ui/icons/Close';
-import aut from '../../helpers/greyflow/greyflow-aut';
+import aut from '../../helpers/GreyFlow/greyflow-aut';
 
 type WithStylesKeys = 'appBar' | 'flex';
 

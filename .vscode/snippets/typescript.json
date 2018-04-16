@@ -2,7 +2,7 @@
     "Add action and action reducer": {
         "prefix": "g_action_reducer",
         "body": [
-            "import { ${TM_DIRECTORY/(?:.*[\\\\\\/]([^\\\\\\/]+)[\\\\\\/]actions$)/$1/}State } from '../${TM_DIRECTORY/(?:.*[\\\\\\/]([^\\\\\\/]+)[\\\\\\/]actions$)/$1/}.state';",
+            "import ${TM_DIRECTORY/(?:.*[\\\\\\/]([^\\\\\\/]+)[\\\\\\/]actions$)/$1/}State from '../${TM_DIRECTORY/(?:.*[\\\\\\/]([^\\\\\\/]+)[\\\\\\/]actions$)/$1/}.state';",
             "",
             "export const _${1:actionName} = '${TM_DIRECTORY/(?:.*[\\\\\\/]([^\\\\\\/]+)[\\\\\\/]actions$)/$1/}/${1}';",
             "",
@@ -34,6 +34,18 @@
             "export const reducer = reduceReducer(",
             "    (s = defaultState, a) => s,",
             ");"
+        ],
+        "description": "Add slice reducer"
+    },
+    "Add slice state": {
+        "prefix": "g_slice_state",
+        "body": [
+            "export default interface ${TM_DIRECTORY/(?:.*[\\\\\\/]([^\\\\\\/]+)$)/$1/}State {",
+            "    $0",
+            "}",
+            "",
+            "export const defaultState: ${TM_DIRECTORY/(?:.*[\\\\\\/]([^\\\\\\/]+)$)/$1/}State = {",
+            "};"
         ],
         "description": "Add slice reducer"
     }

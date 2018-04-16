@@ -52,6 +52,10 @@ export class GreyStore {
         this.inReplayPlayback = false;
     }
 
+    showMenu = (event: PointerEvent) => {
+        // this.store!.dispatch()
+    }
+
     setStore = (store: Store<any>) => {
         this.store = store;
     }

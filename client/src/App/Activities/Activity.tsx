@@ -3,7 +3,7 @@ import * as React from 'react';
 import { ActivityInfo } from './Activities.state';
 import { ListItem, ListItemIcon, ListItemText } from 'material-ui';
 import GroupWorkIcon from '@material-ui/icons/GroupWork';
-import aut from '../../helpers/greyflow/greyflow-aut';
+import aut from '../../helpers/GreyFlow/greyflow-aut';
 
 export interface Props extends ActivityInfo {
     groupName: string;
@@ -16,9 +16,6 @@ export default (props: Props) => (
         <ListItemIcon>
             <GroupWorkIcon />
         </ListItemIcon>
-        <ListItemText>
-            <span className={aut('header', props.name)}>{props.name}</span>
-            {props.groupName}
-        </ListItemText>
+        <ListItemText className={aut('item', props.name)} primary={props.name} secondary={props.groupName} />
     </ListItem>
 );
