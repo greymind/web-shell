@@ -1,4 +1,11 @@
 {
+    "Separator": {
+        "prefix": "g_separator",
+        "body": [
+            "////////////////////////////////////////////////////////////////////////////////"
+        ],
+        "description": "Separator"
+    },
     "Functional component": {
         "prefix": "g_functional_component",
         "body": [

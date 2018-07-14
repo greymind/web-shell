@@ -74,4 +74,4 @@ const App = (props: WithStyles<WithStylesKeys>) => {
   );
 };
 
-export default withRoot(withStyles(styles)<{}>(App));
+export default withRoot(withStyles(styles)(App));

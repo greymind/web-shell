@@ -7,6 +7,8 @@ import {
 } from 'material-ui';
 import CloseIcon from '@material-ui/icons/Close';
 import aut from '../../helpers/GreyFlow/greyflow-aut';
+import ActivityDialog from './ActivityDialog';
+import { Route } from 'react-router';
 
 type WithStylesKeys = 'appBar' | 'flex';
 
@@ -64,6 +66,10 @@ class Activities extends React.Component<Props, State> {
                         <Activity key={activityInfo.id} {...activityInfo} openActivity={this.handleClickOpen} />
                     ))}
                 </List>
+                <Route
+                    path="/activity/:id"
+                    component={ActivityDialog}
+                />
                 <Dialog
                     fullScreen={true}
                     open={this.state.open}

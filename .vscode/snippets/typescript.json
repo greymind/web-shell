@@ -1,4 +1,11 @@
 {
+    "Separator": {
+        "prefix": "g_separator",
+        "body": [
+            "////////////////////////////////////////////////////////////////////////////////"
+        ],
+        "description": "Separator"
+    },
     "Add action and action reducer": {
         "prefix": "g_action_reducer",
         "body": [
